@@ -117,7 +117,7 @@ class AuthController extends Controller
     }
 
 
-    // random
+    // random ini
     public function logout()
     {
         Auth::logout();
