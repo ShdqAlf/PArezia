@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Pelamar\PelamarController;
+use App\Http\Controllers\Pimpinan\PimpinanController;
+use App\Http\Controllers\Staff\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +18,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'login'])->name('login');
-Route::post('/', [AuthController::class, 'login'])->name('login');
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/home', [AuthController::class, 'home'])->name('home');
+Route::middleware('guest')->group(function () {
+    // login
+    Route::get('/', [AuthController::class, 'index'])->name('login');
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('post.login');
+
+    // register
+
+});
+
+Route::middleware(['auth', 'web'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // pelamar
+    Route::middleware('role:Pelamar')->prefix('/pelamar')->name('pelamar')->group(function () {
+        // dashboard
+        Route::get('/', [PelamarController::class, 'index'])->name('.dashboard');
+    });
+
+
+    // admin
+    Route::middleware('role:Admin')->prefix('/admin')->name('admin')->group(function () {
+        // dashboard
+        Route::get('/', [AdminController::class, 'index'])->name('.dashboard');
+    });
+
+
+    // pimpinan
+    Route::middleware('role:Pimpinan')->prefix('/pimpinan')->name('pimpinan')->group(function () {
+        // dashboard
+        Route::get('/', [PimpinanController::class, 'index'])->name('.dashboard');
+    });
+
+
+    // staff
+    Route::middleware('role:Staff')->prefix('/staff')->name('staff')->group(function () {
+        // dashboard
+        Route::get('/', [StaffController::class, 'index'])->name('.dashboard');
+    });
+});
