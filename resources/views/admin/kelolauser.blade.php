@@ -22,7 +22,7 @@
                                 <form action="{{ route('kelolauser.tambah-pengguna') }}" method="post">
                                     <div class="modal-body">
                                         <div class="row mb-3">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Username</label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" name="email" placeholder="Masukkan Email">
                                             </div>
