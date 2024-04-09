@@ -24,7 +24,7 @@ class KelolaUser extends Controller
         ]);
 
         $user = new User();
-        $user->username = $request->username;
+        $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->save();
