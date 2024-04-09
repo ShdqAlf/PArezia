@@ -11,7 +11,7 @@ class KelolaUser extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.kelolauser');
+        return view('admin.kelolauser', compact('users'));
     }
 
     public function tambahPengguna(Request $request)
@@ -30,5 +30,28 @@ class KelolaUser extends Controller
         $user->save();
 
         return redirect()->route('admin.kelolauser.index')->with('success', 'New user has been added.');
+    }
+
+    public function hapusPengguna(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.kelolauser.index')->with('success', 'User has been deleted.');
+    }
+
+    public function edit(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'required|min:6',
+            'role' => 'required',
+        ]);
+
+        $user->update([
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('admin.kelolauser.index')->with('success', 'User has been updated.');
     }
 }

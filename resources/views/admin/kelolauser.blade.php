@@ -71,15 +71,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($users as $key => $user)
                                 <tr>
-                                    <td>1</td>
-                                    <td>admin@gmail.com</td>
-                                    <td>Admin</td>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Hapus</button>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">Edit</button>
+                                        <form action="{{ route('admin.kelolauser.hapus-pengguna', $user) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -88,4 +94,43 @@
         </div>
     </div>
 </section>
+@foreach($users as $user)
+<div class="modal fade" id="editModal{{ $user->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Pengguna</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.kelolauser.edit', $user) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pasword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Staff" {{ $user->role == 'Staff' ? 'selected' : '' }}>Staff</option>
+                            <option value="Pimpinan" {{ $user->role == 'Pimpinan' ? 'selected' : '' }}>Pimpinan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection

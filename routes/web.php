@@ -29,7 +29,6 @@ Route::middleware('guest')->group(function () {
     // register
     Route::get('/pendaftaran', [AuthController::class, 'register'])->name('pendaftaran');
     Route::get('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
-
 });
 
 Route::middleware(['auth', 'web'])->group(function () {
@@ -50,6 +49,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         // kelola user
         Route::get('/kelolauser', [KelolaUser::class, 'index'])->name('.kelolauser.index');
         Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('.kelolauser.tambah-pengguna');
+        Route::delete('/kelolauser/{user}', [KelolaUser::class, 'hapusPengguna'])->name('.kelolauser.hapus-pengguna');
+        Route::put('/kelolauser/{user}', [KelolaUser::class, 'edit'])->name('.kelolauser.edit');
     });
 
 
