@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KelolaUser;
+use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
@@ -54,6 +55,11 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('.kelolauser.tambah-pengguna');
         Route::delete('/kelolauser/{user}', [KelolaUser::class, 'hapusPengguna'])->name('.kelolauser.hapus-pengguna');
         Route::put('/kelolauser/{user}', [KelolaUser::class, 'edit'])->name('.kelolauser.edit');
+
+        // kelola tes
+        Route::get('/kelolates', [KelolaTes::class, 'index'])->name('.kelolates.index');
+        Route::post('/kelolates/tambah-tes', [KelolaTes::class, 'tambahTes'])->name('.kelolates.tambah-tes');
+        Route::delete('/kelolates/hapus-tes/{id}', [KelolaTes::class, 'hapusTes'])->name('.kelolates.hapus-tes');
     });
 
 

@@ -36,7 +36,7 @@ Jadi nu muncul ngan menu eta di role eta.
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="form-editor.html" class='sidebar-link'>
+                    <a href="{{ route('admin.kelolates.index') }}" class='sidebar-link'>
                         <i data-feather="layers" width="20"></i>
                         <span>Kelola Tes Kemampuan</span>
                     </a>
