@@ -29,6 +29,6 @@ class KelolaUser extends Controller
         $user->role = $request->role;
         $user->save();
 
-        return redirect()->route('kelolauser.index')->with('success', 'New user has been added.');
+        return redirect()->route('admin.kelolauser.index')->with('success', 'New user has been added.');
     }
 }
