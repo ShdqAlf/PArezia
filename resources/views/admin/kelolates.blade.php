@@ -15,7 +15,7 @@
                     </div>
                     @endif
                     <div class="col-auto" style="margin-bottom:30px;">
-                        <button class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahPengguna">Tambah Pengguna</button>
+                        <button class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahPengguna">Tambah Tes</button>
                     </div>
                     <div class="modal fade" id="tambahPengguna" tabindex="-1">
                         <div class="modal-dialog">
