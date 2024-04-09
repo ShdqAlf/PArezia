@@ -20,6 +20,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form action="{{ route('admin.kelolauser.tambah-pengguna') }}" method="post">
+                                    @csrf
                                     <div class="modal-body">
                                         <div class="row mb-3">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
