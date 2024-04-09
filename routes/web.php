@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\KelolaUser;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
@@ -44,6 +45,9 @@ Route::middleware(['auth', 'web'])->group(function () {
         // dashboard
         Route::get('/', [AdminController::class, 'index'])->name('.dashboard');
 
+        // kelola user
+        Route::get('/kelolauser', [KelolaUser::class, 'index'])->name('kelolauser.index');
+        Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('kelolauser.tambah-pengguna');
     });
 
 
