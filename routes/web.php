@@ -48,8 +48,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('.dashboard');
 
         // kelola user
-        Route::get('/kelolauser', [KelolaUser::class, 'index'])->name('kelolauser.index');
-        Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('kelolauser.tambah-pengguna');
+        Route::get('/kelolauser', [KelolaUser::class, 'index'])->name('.kelolauser.index');
+        Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('.kelolauser.tambah-pengguna');
     });
 
 

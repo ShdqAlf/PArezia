@@ -30,7 +30,7 @@ Jadi nu muncul ngan menu eta di role eta.
                 </li>
                 <li class='sidebar-title'>Kelola</li>
                 <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="{{ route('admin.kelolauser.index') }}" class='sidebar-link'>
                         <i data-feather="layout" width="20"></i>
                         <span>Kelola User</span>
                     </a>
