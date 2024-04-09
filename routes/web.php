@@ -28,15 +28,18 @@ Route::middleware('guest')->group(function () {
 
     // register
     Route::get('/pendaftaran', [AuthController::class, 'register'])->name('pendaftaran');
-    Route::get('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
+    Route::post('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
 
 });
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/email/verifikasi', [AuthController::class, 'verifikasi'])->name('verification.notice');
+    Route::get('/email/verifikasi/{id}/{hash}', [AuthController::class, 'handler_verification'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/verifikasi-notification', [AuthController::class, 'resend_email'])->middleware('throttle:6,1')->name('verification.send');
 
     // pelamar
-    Route::middleware('role:Pelamar')->prefix('/pelamar')->name('pelamar')->group(function () {
+    Route::middleware(['verified', 'role:Pelamar'])->prefix('/pelamar')->name('pelamar')->group(function () {
         // dashboard
         Route::get('/', [PelamarController::class, 'index'])->name('.dashboard');
     });

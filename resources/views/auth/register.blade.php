@@ -6,7 +6,7 @@
         <h3>Pendaftaran</h3>
         <p>Silahkan untuk melakukan pendaftaran terlebih dulu</p>
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger text-start">
                 <ul>
                     @foreach ($errors->all() as $item)
                         <li>{{ $item }}</li>
@@ -15,7 +15,7 @@
             </div>
         @endif
     </div>
-    <form action="{{ route('post.login') }}" method="POST">
+    <form action="{{ route('proses.pendaftaran') }}" method="POST">
         @csrf
         <div class="form-group position-relative has-icon-left">
             <label for="nama">Nama Lengkap</label>
@@ -51,6 +51,15 @@
             </div>
         </div>
         <div class="form-group position-relative has-icon-left">
+            <label for="email">Email</label>
+            <div class="position-relative">
+                <input type="email" class="form-control" id="email" name="email">
+                <div class="form-control-icon">
+                    <i data-feather="user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group position-relative has-icon-left">
             <label for="no_hp">No WhatsApp</label>
             <div class="position-relative">
                 <input type="text" class="form-control" id="no_hp" name="no_hp" pattern="[0-9]*">
@@ -66,7 +75,18 @@
                     style="height: 100px"></textarea>
             </div>
         </div>
-        <div class="clearfix">
+        <div class="form-group position-relative has-icon-left">
+            <div class="clearfix">
+                <label for="password">Password</label>
+            </div>
+            <div class="position-relative">
+                <input type="password" class="form-control" id="password" name="password">
+                <div class="form-control-icon">
+                    <i data-feather="lock"></i>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mt-3">
             <button class="btn btn-primary float-right" type="submit">Daftar</button>
         </div>
         <div class="text-center">
