@@ -29,13 +29,13 @@ class KelolaUser extends Controller
         $user->role = $request->role;
         $user->save();
 
-        return redirect()->route('admin.kelolauser.index')->with('success', 'New user has been added.');
+        return redirect()->route('admin.kelolauser.index')->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     public function hapusPengguna(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.kelolauser.index')->with('success', 'User has been deleted.');
+        return redirect()->route('admin.kelolauser.index')->with('success', 'Pengguna berhasil dihapus.');
     }
 
     public function edit(Request $request, User $user)
@@ -52,6 +52,6 @@ class KelolaUser extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('admin.kelolauser.index')->with('success', 'User has been updated.');
+        return redirect()->route('admin.kelolauser.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 }

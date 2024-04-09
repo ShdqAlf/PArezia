@@ -9,6 +9,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif
                     <div class="col-auto" style="margin-bottom:30px;">
                         <button class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahPengguna">Tambah Pengguna</button>
                     </div>
