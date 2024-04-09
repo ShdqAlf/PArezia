@@ -22,7 +22,7 @@ Jadi nu muncul ngan menu eta di role eta.
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class='sidebar-title'>Main Menu</li>
-                <li class="sidebar-item active ">
+                <li class="sidebar-item ">
                     <a href="index.html" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Dashboard</span>
@@ -59,7 +59,6 @@ Jadi nu muncul ngan menu eta di role eta.
                         <span>Kelola Penilaian Pelamar</span>
                     </a>
                 </li>
-
 
                 <li class='sidebar-title'>Reports</li>
                 <li class="sidebar-item  ">
