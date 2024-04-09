@@ -43,6 +43,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::middleware('role:Admin')->prefix('/admin')->name('admin')->group(function () {
         // dashboard
         Route::get('/', [AdminController::class, 'index'])->name('.dashboard');
+
     });
 
 
