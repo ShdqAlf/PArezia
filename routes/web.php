@@ -26,6 +26,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('post.login');
 
     // register
+    Route::get('/pendaftaran', [AuthController::class, 'register'])->name('pendaftaran');
+    Route::get('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
 
 });
 

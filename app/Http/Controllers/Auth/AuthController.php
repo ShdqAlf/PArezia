@@ -57,7 +57,12 @@ class AuthController extends Controller
 
 
 
+
     // register pelamar
+    public function register(){
+        return view('auth.register');
+    }
+
     public function proses_register(Request $request)
     {
         $request->validate([
