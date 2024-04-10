@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('teskemampuan', function (Blueprint $table) {
             $table->id();
-            $table->string('pertanyaan')->nullable();
-            $table->string('foto')->nullable();
-            $table->string('file')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->string('keterangan');
+            $table->string('file_download');
+            $table->string('file_upload')->nullable();
+            $table->unsignedBigInteger('pelamar_id')->nullable();
+            $table->foreign('pelamar_id')->references('id')->on('pelamar')->onDelete('cascade');
+            $table->unsignedBigInteger('lowongan_id');
+            $table->foreign('lowongan_id')->references('id')->on('lowongan')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
