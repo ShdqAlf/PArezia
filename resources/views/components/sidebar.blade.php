@@ -23,8 +23,8 @@ Jadi nu muncul ngan menu eta di role eta.
             <ul class="menu">
                 @if (Auth::user()->role == 'Pelamar')
                 <li class='sidebar-title'>Main Menu</li>
-                <li class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelaar') ? 'active' : '' }}">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
+                    <a href="{{ route('pelamar.dashboard') }}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Lowongan Pekerjaan</span>
                     </a>

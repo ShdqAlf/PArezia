@@ -21,7 +21,11 @@
             </div>
             <div class="card-body">
                 @foreach ($lowongans as $item)
-                    <a href="{{ route('pelamar.test.kemampuan', $item->id) }}" class="">
+                    @php
+                        $testExists = $item->teskemampuan()->exists();
+                    @endphp
+                    <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
+                        class="{{ $testExists ? '' : 'disabled' }}" onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">
                         <div class="card mt-3 info-a">
                             <div class="card-body">
                                 <div class="info" style="color: #fff">
@@ -39,4 +43,16 @@
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function showSweetAlert() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Test Kemampuan Tidak Tersedia',
+                text: 'Maaf, test kemampuan untuk lowongan ini belum tersedia.',
+            });
+        }
+    </script>
+
 @endsection

@@ -26,8 +26,8 @@ class TesKemampuanModel extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function loker(): BelongsTo
+    public function lowongan(): BelongsTo
     {
-        return $this->belongsTo(LokerModel::class,);
+        return $this->belongsTo(LokerModel::class,'lowongan_id');
     }
 }
