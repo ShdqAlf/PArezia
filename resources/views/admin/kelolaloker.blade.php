@@ -65,15 +65,9 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Mulai</label>
-                                            <div class="col-sm-8">
-                                                <input type="datetime-local" class="form-control" name="tanggal_mulai" placeholder="Tanggal Mulai">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Berakhir</label>
                                             <div class="col-sm-8">
-                                                <input type="datetime-local" class="form-control" name="tanggal_berakhir" placeholder="Tanggal Berakhir">
+                                                <input type="date" class="form-control" name="tanggal_berakhir" placeholder="Tanggal Berakhir">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
