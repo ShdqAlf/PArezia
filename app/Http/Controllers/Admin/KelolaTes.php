@@ -3,37 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\TesKemampuanModel;
 use Illuminate\Http\Request;
-use App\Models\teskemampuanModel;
 use Illuminate\Support\Facades\Storage;
 
 class KelolaTes extends Controller
 {
     public function index()
     {
-        $tesKemampuan = teskemampuanModel::all();
+        $tesKemampuan = TesKemampuanModel::all();
         return view('admin.kelolates', compact('tesKemampuan'));
     }
 
     public function tambahTes(Request $request)
     {
-        $tesKemampuan = new teskemampuanModel();
+        $tesKemampuan = new TesKemampuanModel();
         $tesKemampuan->pertanyaan = $request->pertanyaan;
 
-        // Menyimpan foto
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('foto_tes', 'public');
-            $tesKemampuan->foto = $fotoPath;
+        // Menyimpan
+        if ($request->hasFile('file_download')) {
+            $file = $request->file('file_download');
+            $fileName = $file->getClientOriginalName();
+            $tesKemampuan->file_download->move('image/file_tes/', $fileName);
         }
-
-        // Menyimpan file
-        if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('file_tes', 'public');
-            $tesKemampuan->file = $filePath;
-        }
-
         $tesKemampuan->save();
-
         return redirect()->route('admin.kelolates.index')->with('success', 'Tes berhasil ditambahkan');
     }
 

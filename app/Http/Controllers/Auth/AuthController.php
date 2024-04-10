@@ -40,6 +40,7 @@ class AuthController extends Controller
                 } else {
                     Auth::logout();
                     alert()->error('Role tidak ditemukan');
+                    return redirect()->route('login');
                 }
             } else {
                 if ($user->role == 'Pelamar') {
