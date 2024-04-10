@@ -27,4 +27,27 @@ class KelolaLokerController extends Controller
 
         return redirect()->route('admin.kelolaloker.index')->with('success', 'Lowongan berhasil ditambahkan');
     }
+
+    public function hapusLoker($id)
+    {
+        $loker = LokerModel::findOrFail($id);
+        $loker->delete();
+
+        return redirect()->route('admin.kelolaloker.index')->with('success', 'Lowongan berhasil dihapus');
+    }
+
+    public function editLoker(Request $request, LokerModel $row)
+    {
+        $row->update([
+            'judul' => $request->judul,
+            'posisi' => $request->posisi,
+            'minimal_pendidikan' => $request->pendidikan,
+            'minimal_pengalaman' => $request->pengalaman,
+            'usia_maks' => $request->usia_maks,
+            'keterangan' => $request->keterangan,
+
+        ]);
+
+        return redirect()->route('admin.kelolaloker.index')->with('success', 'Lowongan berhasil diperbarui.');
+    }
 }
