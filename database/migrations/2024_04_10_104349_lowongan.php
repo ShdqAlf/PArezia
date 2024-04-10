@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('posisi');
             $table->string('minimal_pendidikan');
             $table->string('minimal_pengalaman');
+            $table->datetime('tanggal_mulai');
+            $table->datetime('tanggal_berakhir');
             $table->integer('usia_maks');
             $table->longText('keterangan');
             $table->timestamps();

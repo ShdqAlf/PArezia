@@ -15,6 +15,8 @@ class LokerModel extends Model
         'minimal_pendidikan',
         'minimal_pengalaman',
         'usia_maks',
+        'tanggal_mulai',
+        'tanggal_berakhir',
         'keterangan',
     ];
     protected $casts = [

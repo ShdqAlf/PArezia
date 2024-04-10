@@ -64,6 +64,18 @@
                                                 <input type="number" class="form-control" name="usia_maks" placeholder="Usia Maksimal">
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Mulai</label>
+                                            <div class="col-sm-8">
+                                                <input type="datetime-local" class="form-control" name="tanggal_mulai" placeholder="Tanggal Mulai">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Berakhir</label>
+                                            <div class="col-sm-8">
+                                                <input type="datetime-local" class="form-control" name="tanggal_berakhir" placeholder="Tanggal Berakhir">
+                                            </div>
+                                        </div>
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">Tambahkan Keterangan</label>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="keterangan"></textarea>

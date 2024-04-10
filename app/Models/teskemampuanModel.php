@@ -17,6 +17,8 @@ class TesKemampuanModel extends Model
         'keterangan',
         'file_download',
         'file_upload',
+        'lowongan_id',
+        'pelamar_id',
     ];
 
     protected $casts = [
