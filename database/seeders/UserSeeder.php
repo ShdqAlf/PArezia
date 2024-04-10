@@ -33,15 +33,5 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'role' => 'Pimpinan'
         ]);
-        User::create([
-            'email' => 'pelamar@gmail.com',
-            'password' => bcrypt('password'),
-            'email_verified_at' => '2024-03-28 11:07:30',
-            'role' => 'Pelamar'
-        ]);
-        PelamarModel::create([
-            'nama' => 'Pelamar 1',
-            'user_id' => 4,
-        ]);
     }
 }

@@ -30,12 +30,11 @@ class KelolaTes extends Controller
             $fileName = $file->getClientOriginalName();
             $file->move('file_tes/', $fileName);
             $tesKemampuan = new TesKemampuanModel([
-                'file_download' => $fileName,
-                'keterangan' => $request->keterangan,
-                'lowongan_id' => $request->judul,
+                'file_download'=> $fileName,
+                'keterangan'=> $request->keteramha
             ]);
-            $tesKemampuan->save();
         }
+        $tesKemampuan->save();
         return redirect()->route('admin.kelolates.index')->with('success', 'Tes berhasil ditambahkan');
     }
 
