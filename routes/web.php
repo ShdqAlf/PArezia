@@ -63,6 +63,7 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/kelolates', [KelolaTes::class, 'index'])->name('.kelolates.index');
         Route::post('/kelolates/tambah-tes', [KelolaTes::class, 'tambahTes'])->name('.kelolates.tambah-tes');
         Route::delete('/kelolates/hapus-tes/{id}', [KelolaTes::class, 'hapusTes'])->name('.kelolates.hapus-tes');
+        Route::put('/kelolates/{tes}', [KelolaTes::class, 'edit'])->name('.kelolates.edit');
 
         // kelola lowongan
         Route::get('/kelolaloker', [KelolaLokerController::class, 'index'])->name('.kelolaloker.index');

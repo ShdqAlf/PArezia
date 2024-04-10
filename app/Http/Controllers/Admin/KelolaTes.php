@@ -45,4 +45,23 @@ class KelolaTes extends Controller
 
         return redirect()->route('admin.kelolates.index')->with('success', 'Data tes berhasil dihapus');
     }
+
+    public function edit(Request $request, TesKemampuanModel $tes)
+    {
+        $tes->update([
+            'keterangan' => $request->keterangan,
+            'lowongan_id' => $request->judul,
+        ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('file_tes', $fileName, 'public');
+            $tes->file_download = $filePath;
+        }
+
+        $tes->save();
+
+        return redirect()->route('admin.kelolates.index')->with('success', 'Data tes berhasil diubah');
+    }
 }
