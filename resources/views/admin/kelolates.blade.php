@@ -87,7 +87,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -96,5 +95,49 @@
         </div>
     </div>
 </section>
-
+@foreach($tesKemampuan as $tes)
+<div class="modal fade" id="editModal{{ $tes->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Tes Kemampuan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.kelolates.edit', $tes) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" value="{{ $tes->keterangan }}">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Update File</label>
+                        <div class="form-file">
+                            <input type="file" class="form-file-input" id="customFile" name="file">
+                            <label class="form-file-label" for="customFile" value="{{ $tes->file_download }}">
+                                <span class="form-file-text">Pilih file...</span>
+                                <span class="form-file-button btn-primary "><i data-feather="upload"></i></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pendidikan" class="form-label">Judul</label>
+                        <select class="form-select" id="role" name="judul">
+                            <option>Pilih Judul</option>
+                            @foreach($loker as $key => $judul)
+                            <option value="{{ $judul->id }}" {{ $tes->loker_id == $judul->id ? 'selected' : '' }}>{{ $judul->judul }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
