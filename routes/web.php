@@ -67,6 +67,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         // kelola lowongan
         Route::get('/kelolaloker', [KelolaLokerController::class, 'index'])->name('.kelolaloker.index');
         Route::post('/kelolaloker/tambah-loker', [KelolaLokerController::class, 'tambahLoker'])->name('.kelolaloker.tambah-loker');
+        Route::delete('/kelolaloker/{id}', [KelolaLokerController::class, 'hapusLoker'])->name('.kelolaloker.hapus-loker');
+        Route::put('/kelolaloker/{row}', [KelolaLokerController::class, 'editLoker'])->name('.kelolaloker.edit');
     });
 
 

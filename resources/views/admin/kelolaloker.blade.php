@@ -61,7 +61,7 @@
                                         <div class="row mb-3">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Usia Maksimal</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" name="usia_maks" placeholder="Usia Maksimal">
+                                                <input type="number" class="form-control" name="usia_maks" placeholder="Usia Maksimal">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
@@ -102,8 +102,14 @@
                                     <td>{{ $row->usia_maks }}</td>
                                     <td>{{ $row->keterangan }}</td>
                                     <td>
-                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                        <form action="{{ route('admin.kelolaloker.hapus-loker', $row->id) }}" method="POST" class="d-inline">
+                                        <div class="btn-group">
+                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $row->id }}">Edit</button>
+                                            <form action="{{ route('admin.kelolaloker.hapus-loker', $row->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -116,5 +122,56 @@
         </div>
     </div>
 </section>
-
+@foreach($lowongan as $row)
+<div class="modal fade" id="editModal{{ $row->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Lowongan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.kelolaloker.edit', $row) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul</label>
+                        <input type="text" class="form-control" name="judul" value="{{ $row->judul }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="posisi" class="form-label">Posisi</label>
+                        <input type="text" class="form-control" name="posisi" value="{{ $row->posisi }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pendidikan" class="form-label">Minimal Pendidikan</label>
+                        <select class="form-select" id="role" name="pendidikan">
+                            <option value="SD/Sederajat" {{ $row->minimal_pendidikan == 'SD/Sederajat' ? 'selected' : '' }}>SD/Sederajat</option>
+                            <option value="SMP/Sederajat" {{ $row->minimal_pendidikan == 'SMP/Sederajat' ? 'selected' : '' }}>SMP/Sederajat</option>
+                            <option value="SMA/Sederajat" {{ $row->minimal_pendidikan == 'SMA/Sederajat' ? 'selected' : '' }}>SMA/Sederajat</option>
+                            <option value="D3" {{ $row->minimal_pendidikan == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="S1/D4" {{ $row->minimal_pendidikan == 'S1/D4' ? 'selected' : '' }}>S1/D4</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pengalaman" class="form-label">Minimal Pengalaman</label>
+                        <input type="text" class="form-control" name="pengalaman" value="{{ $row->minimal_pengalaman }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="usia_maks" class="form-label">Usia Maksimal</label>
+                        <input type="text" class="form-control" name="usia_maks" value="{{ $row->usia_maks }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" value="{{ $row->keterangan }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
