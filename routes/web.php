@@ -29,7 +29,7 @@ Route::middleware('guest')->group(function () {
 
     // register
     Route::get('/pendaftaran', [AuthController::class, 'register'])->name('pendaftaran');
-    Route::get('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
+    Route::post('/prosespendaftaran', [AuthController::class, 'proses_register'])->name('proses.pendaftaran');
 });
 
 Route::middleware(['auth', 'web'])->group(function () {
