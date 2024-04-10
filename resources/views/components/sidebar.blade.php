@@ -42,7 +42,7 @@ Jadi nu muncul ngan menu eta di role eta.
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
+                    <a href="{{ route('admin.kelolaloker.index') }}" class='sidebar-link'>
                         <i data-feather="grid" width="20"></i>
                         <span>Kelola Lowongan Pekerjaan</span>
                     </a>

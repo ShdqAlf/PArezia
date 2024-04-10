@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KelolaUser;
 use App\Http\Controllers\Admin\KelolaTes;
+use App\Http\Controllers\Admin\KelolaLokerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
@@ -60,6 +61,10 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/kelolates', [KelolaTes::class, 'index'])->name('.kelolates.index');
         Route::post('/kelolates/tambah-tes', [KelolaTes::class, 'tambahTes'])->name('.kelolates.tambah-tes');
         Route::delete('/kelolates/hapus-tes/{id}', [KelolaTes::class, 'hapusTes'])->name('.kelolates.hapus-tes');
+
+        // kelola lowongan
+        Route::get('/kelolaloker', [KelolaLokerController::class, 'index'])->name('.kelolaloker.index');
+        Route::post('/kelolaloker/tambah-loker', [KelolaLokerController::class, 'tambahLoker'])->name('.kelolaloker.tambah-loker');
     });
 
 
