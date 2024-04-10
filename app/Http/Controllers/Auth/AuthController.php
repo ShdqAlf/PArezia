@@ -86,7 +86,7 @@ class AuthController extends Controller
             'nama.required' => 'Nama wajib diisi',
             'email.email' => 'Format email salah, berikan tanda @',
             'password.required' => 'Password wajib diisi',
-            'password.min' => 'Password minimal 8 ch',
+            'password.min' => 'Password minimal 8 karakter',
         ]);
         $userexs = User::where('email', $request->input('email'))->first();
         if ($userexs) {

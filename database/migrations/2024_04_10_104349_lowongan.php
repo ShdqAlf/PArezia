@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('lowongan', function (Blueprint $table) {
             $table->id();
-            $table->string('judul')->nullable();
-            $table->string('posisi')->nullable();
-            $table->string('minimal_pendidikan')->nullable();
-            $table->string('minimal_pengalaman')->nullable(); //dalam tahun
-            $table->string('usia_maks')->nullable();
-            $table->string('keterangan')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->string('judul');
+            $table->string('posisi');
+            $table->string('minimal_pendidikan');
+            $table->string('minimal_pengalaman');
+            $table->string('usia_maks');
+            $table->string('keterangan');
+            $table->timestamps();
         });
     }
 
