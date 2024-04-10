@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-header bg-primary">
                 <h3 class="text-white">Tes Kemampuan</h3>
+                <p>Berakhir Pada Tanggal : {{ \Carbon\Carbon::parse($tes->loker->tanggal_berakhir)->locale('id_ID')->isoFormat('D MMMM Y') }}</p>
             </div>
             <div class="card-body">
                 <div class="text-center mt-3">
@@ -25,17 +26,6 @@
             event.preventDefault();
             document.getElementById('tes').style.display = 'block';
             document.getElementById('mulai_tes').style.display = 'none';
-            var timeleft = 30;
-            var downloadTimer = setInterval(function() {
-                timeleft--;
-                document.getElementById("countdown").textContent = "Waktu Tersisa: " + timeleft + " detik";
-                if (timeleft <= 0) {
-                    clearInterval(downloadTimer);
-                    document.getElementById("tes").style.display = "none";
-                    document.getElementById("mulai_tes").style.display = "block";
-                    swal("Waktu Habis!", "Tes Selesai.", "info");
-                }
-            }, 1000);
         });
     </script>
 @endsection

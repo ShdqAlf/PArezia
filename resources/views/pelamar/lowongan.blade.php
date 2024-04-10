@@ -20,7 +20,7 @@
                 <h3 class="text-white">Lowongan Pekerjaan</h3>
             </div>
             <div class="card-body">
-                @foreach ($lowongan as $item)
+                @foreach ($lowongans as $item)
                     <a href="{{ route('pelamar.test.kemampuan', $item->id) }}" class="">
                         <div class="card mt-3 info-a">
                             <div class="card-body">

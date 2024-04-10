@@ -22,7 +22,6 @@ class KelolaLokerController extends Controller
         $Loker->minimal_pendidikan = $request->pendidikan;
         $Loker->minimal_pengalaman = $request->pengalaman;
         $Loker->usia_maks = $request->usia_maks;
-        $Loker->tanggal_mulai = $request->tanggal_mulai;
         $Loker->tanggal_berakhir = $request->tanggal_berakhir;
         $Loker->keterangan = $request->keterangan;
         $Loker->save();

@@ -11,10 +11,9 @@ class TesController extends Controller
 {
     public function index($id){
         $lowongan = LokerModel::find($id);
-        $tes = TesKemampuanModel::where('lowongan_id', $lowongan->id)->get();
+        $tes = TesKemampuanModel::where('lowongan_id', $lowongan->id)->first();
         $data = [
             'tes'=>$tes,
-            'lowongan'=>$lowongan,
         ];
         return view('pelamar.teskemampuan', $data);
     }
