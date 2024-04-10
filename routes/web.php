@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KelolaUser;
 use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Admin\KelolaLokerController;
+use App\Http\Controllers\Admin\KelolaBobotController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pelamar\TesController;
@@ -70,6 +71,9 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::post('/kelolaloker/tambah-loker', [KelolaLokerController::class, 'tambahLoker'])->name('.kelolaloker.tambah-loker');
         Route::delete('/kelolaloker/{id}', [KelolaLokerController::class, 'hapusLoker'])->name('.kelolaloker.hapus-loker');
         Route::put('/kelolaloker/{row}', [KelolaLokerController::class, 'editLoker'])->name('.kelolaloker.edit');
+
+        // kelola bobot
+        Route::get('/kelolabobot', [KelolaBobotController::class, 'index'])->name('.kelolabobot.index');
     });
 
 

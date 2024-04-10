@@ -64,7 +64,7 @@ Jadi nu muncul ngan menu eta di role eta.
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="table-datatable.html" class='sidebar-link'>
+                    <a href="{{ route('admin.kelolabobot.index') }}" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i>
                         <span>Kelola Bobot Penilaian</span>
                     </a>
