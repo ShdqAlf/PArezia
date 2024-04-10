@@ -75,8 +75,8 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $tes->keterangan }}</td>
-                                    <td><a href="{{ asset($tes->file_download) }}" download>Unduh File</a></td>
-                                    <td>{{ $tes->loker->judul }}</td>
+                                    <td><a href="{{ asset($tes->file) }}" download>Unduh File</a></td>
+                                    <td></td>
                                     <td>
                                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $tes->id }}">Edit</button>
                                         <form action="{{ route('admin.kelolates.hapus-tes', $tes->id) }}" method="POST" class="d-inline">
