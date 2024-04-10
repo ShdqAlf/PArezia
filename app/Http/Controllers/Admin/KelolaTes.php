@@ -24,24 +24,23 @@ class KelolaTes extends Controller
 
     public function tambahTes(Request $request)
     {
-        // Menyimpan
-        if ($request->hasFile('file_download')) {
-            $file = $request->file('file_download');
-            $fileName = $file->getClientOriginalName();
-            $file->move('file_tes/', $fileName);
-            $tesKemampuan = new TesKemampuanModel([
-                'file_download' => $fileName,
-                'keterangan' => $request->keterangan,
-                'lowongan_id' => $request->judul,
-            ]);
-            $tesKemampuan->save();
+        $tesKemampuan = new TesKemampuanModel();
+        $tesKemampuan->keterangan = $request->keterangan;
+        $tesKemampuan->lowongan_id = $request->judul;
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
+            $filePath = $file->storeAs('file_tes', $fileName, 'public');
+            $tesKemampuan->file_download = $filePath; // Sesuaikan dengan nama kolom yang benar
         }
+        $tesKemampuan->save();
         return redirect()->route('admin.kelolates.index')->with('success', 'Tes berhasil ditambahkan');
     }
 
     public function hapusTes($id)
     {
-        $tesKemampuan = TesKemampuanModel::findOrFail($id);
+        $tesKemampuan = teskemampuanModel::findOrFail($id);
         $tesKemampuan->delete();
 
         return redirect()->route('admin.kelolates.index')->with('success', 'Data tes berhasil dihapus');

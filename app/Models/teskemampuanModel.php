@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class TesKemampuanModel extends Model
@@ -23,8 +24,8 @@ class TesKemampuanModel extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function loker(): HasOne
+    public function loker(): BelongsTo
     {
-        return $this->hasOne(LokerModel::class);
+        return $this->belongsTo(LokerModel::class);
     }
 }
