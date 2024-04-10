@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('teskemampuan', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan');
+            $table->longText('keterangan');
             $table->string('file_download');
             $table->string('file_upload')->nullable();
             $table->unsignedBigInteger('pelamar_id')->nullable();

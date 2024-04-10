@@ -45,21 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function staff(): HasOne
-    {
-        return $this->hasOne(StaffModel::class);
-    }
     public function pelamar(): HasOne
     {
         return $this->hasOne(PelamarModel::class);
-    }
-    public function admin(): HasOne
-    {
-        return $this->hasOne(AdminModel::class);
-    }
-    public function pimpinan(): HasOne
-    {
-        return $this->hasOne(PimpinanModel::class);
     }
 }
 

@@ -39,18 +39,6 @@ class UserSeeder extends Seeder
             'email_verified_at' => '2024-03-28 11:07:30',
             'role' => 'Pelamar'
         ]);
-        AdminModel::create([
-            'nama' => 'Admin 1',
-            'user_id' => 1,
-        ]);
-        StaffModel::create([
-            'nama' => 'Staff 1',
-            'user_id' => 2,
-        ]);
-        PimpinanModel::create([
-            'nama' => 'Pimpinan 1',
-            'user_id' => 3,
-        ]);
         PelamarModel::create([
             'nama' => 'Pelamar 1',
             'user_id' => 4,

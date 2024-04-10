@@ -32,7 +32,7 @@ class KelolaTes extends Controller
 
     public function hapusTes($id)
     {
-        $tesKemampuan = teskemampuanModel::findOrFail($id);
+        $tesKemampuan = TesKemampuanModel::findOrFail($id);
         $tesKemampuan->delete();
 
         return redirect()->route('admin.kelolates.index')->with('success', 'Data tes berhasil dihapus');

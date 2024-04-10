@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Admin\KelolaLokerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\PelamarController;
+use App\Http\Controllers\Pelamar\TesController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
 use App\Http\Controllers\Staff\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +42,9 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     // pelamar
     Route::middleware(['verified', 'role:Pelamar'])->prefix('/pelamar')->name('pelamar')->group(function () {
-        // dashboard
+        // lowongan - tes
         Route::get('/', [PelamarController::class, 'index'])->name('.dashboard');
+        Route::get('/teskemampuan/{id}', [TesController::class, 'index'])->name('.test.kemampuan');
     });
 
 

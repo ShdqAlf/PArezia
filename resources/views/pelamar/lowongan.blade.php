@@ -21,19 +21,16 @@
             </div>
             <div class="card-body">
                 @foreach ($lowongan as $item)
-                    <a href="" class="">
+                    <a href="{{ route('pelamar.test.kemampuan', $item->id) }}" class="">
                         <div class="card mt-3 info-a">
                             <div class="card-body">
                                 <div class="info" style="color: #fff">
-                                    <h2 class="text-white">Lowongan Pekerjaan Pada Bagian Developer</h2>
-                                    <h6 class="text-white">Posisi : Programmer</h6>
-                                    <h6 class="text-white">Batas Usia : 30 Tahun</h6>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, eius in facilis totam
-                                        vel
-                                        aut
-                                        excepturi maxime quo nemo, cum vero inventore quibusdam rem harum doloremque
-                                        repudiandae,
-                                        temporibus beatae ex!</p>
+                                    <h2 class="text-white">{{ $item->judul }}</h2>
+                                    <h6 class="text-white">Posisi : {{ $item->posisi }}</h6>
+                                    <h6 class="text-white">Pengalaman Terakhir : {{ $item->minimal_pengalaman }}</h6>
+                                    <h6 class="text-white">Minimal Pendidikan : {{ $item->minimal_pendidikan }}</h6>
+                                    <h6 class="text-white">Batas Usia : {{ $item->usia_maks }} Tahun Maksimal</h6>
+                                    <p>{{ $item->keterangan }}</p>
                                 </div>
                             </div>
                         </div>
