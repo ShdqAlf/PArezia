@@ -9,10 +9,10 @@
                     {{ \Carbon\Carbon::parse($tes->lowongan->tanggal_berakhir)->locale('id_ID')->isoFormat('D MMMM Y') }}
                 </p>
                 <a href="{{ route('pelamar.dashboard') }}" class="btn btn-secondary text-white">
-                   <div class="d-flex align-items-center">
-                    <i data-feather="chevron-left" width="20"></i>
-                    Kembali
-                   </div>
+                    <div class="d-flex align-items-center">
+                        <i data-feather="chevron-left" width="20"></i>
+                        Kembali
+                    </div>
                 </a>
             </div>
             <div class="card-body">
@@ -22,7 +22,8 @@
                 <div id="tes" style="display: none;">
                     <p>{{ $tes->keterangan }}</p>
                     <div class="text-right">
-                        <a href="" class="btn btn-primary">Unduh File</a>
+                        <a href="{{ route('pelamar.download.file', $tes->file_download) }}" class="btn btn-primary">Unduh
+                            File</a>
                     </div>
                     <form action="">
                         <div class="mt-4">

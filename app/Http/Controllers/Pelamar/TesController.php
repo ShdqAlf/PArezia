@@ -17,4 +17,9 @@ class TesController extends Controller
         ];
         return view('pelamar.teskemampuan', $data);
     }
+
+    public function download_file($file)
+    {
+        return response()->download(public_path('file_tes/' . $file));
+    }
 }
