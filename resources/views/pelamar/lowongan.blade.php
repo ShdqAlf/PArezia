@@ -3,11 +3,18 @@
 @section('content')
     <style>
         .info-a:hover {
-            background-color: #5A8DEE;
+            background-color: #A3AFBD;
         }
 
         .info-a {
-            background-color: #A3AFBD;
+            background-color: #FDAC41;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .info-a-tes {
+            background-color: #39DA8A;
+            padding: 10px;
+            border-radius: 10px;
         }
     </style>
     <div class="page-title">
@@ -24,21 +31,30 @@
                     @php
                         $testExists = $item->teskemampuan()->exists();
                     @endphp
-                    <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
-                        class="{{ $testExists ? '' : 'disabled' }}" onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">
-                        <div class="card mt-3 info-a">
-                            <div class="card-body">
-                                <div class="info" style="color: #fff">
-                                    <h2 class="text-white">{{ $item->judul }}</h2>
-                                    <h6 class="text-white">Posisi : {{ $item->posisi }}</h6>
-                                    <h6 class="text-white">Pengalaman Terakhir : {{ $item->minimal_pengalaman }}</h6>
-                                    <h6 class="text-white">Minimal Pendidikan : {{ $item->minimal_pendidikan }}</h6>
-                                    <h6 class="text-white">Batas Usia : {{ $item->usia_maks }} Tahun Maksimal</h6>
-                                    <p>{{ $item->keterangan }}</p>
-                                </div>
+
+                    <div class="card mt-3 bg-primary">
+                        <div class="card-body">
+                            <div class="info" style="color: #fff">
+                                <h2 class="text-white">{{ $item->judul }}</h2>
+                                <h6 class="text-white">Posisi : {{ $item->posisi }}</h6>
+                                <h6 class="text-white">Pengalaman Terakhir : {{ $item->minimal_pengalaman }}</h6>
+                                <h6 class="text-white">Minimal Pendidikan : {{ $item->minimal_pendidikan }}</h6>
+                                <h6 class="text-white">Batas Usia : {{ $item->usia_maks }} Tahun Maksimal</h6>
+                                <p>{{ $item->keterangan }}</p>
+                            </div>
+                            <div class="text-end">
+                                @if ($item->teskemampuan->file_upload == null)
+                                    <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
+                                        class="{{ $testExists ? '' : 'disabled' }} info-a text-white"
+                                        onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">Ikuti Tes
+                                        Kemampuan
+                                    </a>
+                                @else
+                                    <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                @endif
                             </div>
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -53,6 +69,6 @@
                 text: 'Maaf, test kemampuan untuk lowongan ini belum tersedia.',
             });
         }
-    </script>
 
+    </script>
 @endsection

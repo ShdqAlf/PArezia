@@ -20,12 +20,23 @@
                     <a href="" id="mulai_tes" class="btn btn-primary">Mulai Tes ?</a>
                 </div>
                 <div id="tes" style="display: none;">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <p>{{ $tes->keterangan }}</p>
                     <div class="text-right">
                         <a href="{{ route('pelamar.download.file', $tes->file_download) }}" class="btn btn-primary">Unduh
                             File</a>
                     </div>
-                    <form action="">
+                    <form action="{{ route('pelamar.upload.file', $tes->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="mt-4">
                             <div class="mb-3">
                                 <label for="file_upload" class="form-label">Upload File</label>
@@ -33,7 +44,7 @@
                             </div>
                         </div>
                         <div class="text-left">
-                            <a href="" class="btn btn-success">Upload</a>
+                            <button type="submit" class="btn btn-success">Upload</button>
                         </div>
                     </form>
                 </div>
