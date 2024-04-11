@@ -18,20 +18,30 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // User::create([
+        //     'email' => 'admin@gmail.com',
+        //     'password' => bcrypt('password'),
+        //     'role' => 'Admin'
+        // ]);
+        // User::create([
+        //     'email' => 'staff@gmail.com',
+        //     'password' => bcrypt('password'),
+        //     'role' => 'Staff'
+        // ]);
+        // User::create([
+        //     'email' => 'pimpinan@gmail.com',
+        //     'password' => bcrypt('password'),
+        //     'role' => 'Pimpinan'
+        // ]);
+
         User::create([
-            'email' => 'admin@gmail.com',
+            'email'=>'pelamar@gmail.com',
             'password' => bcrypt('password'),
-            'role' => 'Admin'
+            'email_verified_at'=>'2024-04-11 13:18:00'
         ]);
-        User::create([
-            'email' => 'staff@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'Staff'
-        ]);
-        User::create([
-            'email' => 'pimpinan@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'Pimpinan'
+        PelamarModel::create([
+            'nama'=>'Pelamar 1',
+            'user_id'=> 4,
         ]);
     }
 }

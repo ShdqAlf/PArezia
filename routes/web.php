@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Admin\KelolaLokerController;
 use App\Http\Controllers\Admin\KelolaBobotController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Pelamar\LaporanHasilController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pelamar\TesController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
@@ -48,6 +49,9 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/teskemampuan/{id}', [TesController::class, 'index'])->name('.test.kemampuan');
         Route::get('/teskemampuan/download/{file}', [TesController::class, 'download_file'])->name('.download.file');
         Route::post('/teskemampuan/upload/{id}', [TesController::class, 'uploadFile'])->name('.upload.file');
+
+        // laporan hasil
+        Route::get('/laporanhasil', [LaporanHasilController::class, 'index'])->name('.laporan.hasil');
     });
 
 

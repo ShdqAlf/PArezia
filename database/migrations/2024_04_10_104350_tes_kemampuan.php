@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('file_download');
             $table->string('file_upload')->nullable();
             $table->boolean('batal_tes')->default(false);
+            $table->boolean('status')->default(false);
             $table->unsignedBigInteger('pelamar_id')->nullable();
             $table->foreign('pelamar_id')->references('id')->on('pelamar')->onDelete('cascade');
             $table->unsignedBigInteger('lowongan_id');

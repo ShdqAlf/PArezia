@@ -17,7 +17,7 @@ Jadi nu muncul ngan menu eta di role eta.
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            <img src="assets/images/logo.svg" alt="" srcset="">
+            <img src="{{ asset('assets/images/logo.svg') }}" alt="" srcset="">
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
@@ -29,8 +29,8 @@ Jadi nu muncul ngan menu eta di role eta.
                         <span>Lowongan Pekerjaan</span>
                     </a>
                 </li>
-                <li class="sidebar-item ">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ Str::startsWith(request()->path(), 'pelamar/laporanhasil') ? 'active' : '' }}">
+                    <a href="{{ route('pelamar.laporan.hasil') }}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Laporan Hasil</span>
                     </a>

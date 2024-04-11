@@ -11,6 +11,7 @@
             padding: 10px;
             border-radius: 10px;
         }
+
         .info-a-tes {
             background-color: #39DA8A;
             padding: 10px;
@@ -43,14 +44,22 @@
                                 <p>{{ $item->keterangan }}</p>
                             </div>
                             <div class="text-end">
-                                @if ($item->teskemampuan->file_upload == null)
+                                @if ($testExists)
+                                    @if ($item->teskemampuan->file_upload == null)
+                                        <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
+                                            class="{{ $testExists ? '' : 'disabled' }} info-a text-white"
+                                            onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">Ikuti Tes
+                                            Kemampuan
+                                        </a>
+                                    @else
+                                        <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                    @endif
+                                @else
                                     <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
                                         class="{{ $testExists ? '' : 'disabled' }} info-a text-white"
                                         onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">Ikuti Tes
                                         Kemampuan
                                     </a>
-                                @else
-                                    <a class="info-a-tes text-white">Tes Sudah Selesai</a>
                                 @endif
                             </div>
                         </div>
@@ -69,6 +78,5 @@
                 text: 'Maaf, test kemampuan untuk lowongan ini belum tersedia.',
             });
         }
-
     </script>
 @endsection

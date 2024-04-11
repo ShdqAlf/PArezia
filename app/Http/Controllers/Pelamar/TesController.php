@@ -12,10 +12,13 @@ class TesController extends Controller
 {
     public function index($id)
     {
+        $user_id = auth()->user();
+        $pelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $lowongan = LokerModel::find($id);
         $tes = TesKemampuanModel::where('lowongan_id', $lowongan->id)->first();
         $data = [
             'tes' => $tes,
+            'pelamar' => $pelamar,
         ];
         return view('pelamar.teskemampuan', $data);
     }
