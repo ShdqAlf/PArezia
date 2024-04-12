@@ -21,68 +21,77 @@ Jadi nu muncul ngan menu eta di role eta.
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                @if (Auth::user()->role == 'Pelamar')
-                <li class='sidebar-title'>Main Menu</li>
-                <li class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
+                <li
+                    class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
                     <a href="{{ route('pelamar.dashboard') }}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Lowongan Pekerjaan</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Str::startsWith(request()->path(), 'pelamar/laporanhasil') ? 'active' : '' }}">
-                    <a href="{{ route('pelamar.laporan.hasil') }}" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
-                        <span>Laporan Hasil</span>
-                    </a>
-                </li>
+                @if (Auth::user()->role == 'Pelamar')
+                    <li class='sidebar-title'>Main Menu</li>
+                    <li
+                        class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
+                        <a href="{{ route('pelamar.dashboard') }}" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Lowongan Pekerjaan</span>
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ Str::startsWith(request()->path(), 'pelamar/laporanhasil') ? 'active' : '' }}">
+                        <a href="{{ route('pelamar.laporan.hasil') }}" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Laporan Hasil</span>
+                        </a>
+                    </li>
                 @endif
                 @if (Auth::user()->role == 'Admin')
-                <li class='sidebar-title'>Main Menu</li>
-                <li class="sidebar-item ">
-                    <a href="index.html" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class='sidebar-title'>Kelola</li>
-                <li class="sidebar-item  ">
-                    <a href="{{ route('admin.kelolauser.index') }}" class='sidebar-link'>
-                        <i data-feather="layout" width="20"></i>
-                        <span>Kelola User</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{ route('admin.kelolates.index') }}" class='sidebar-link'>
-                        <i data-feather="layers" width="20"></i>
-                        <span>Kelola Tes Kemampuan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{ route('admin.kelolaloker.index') }}" class='sidebar-link'>
-                        <i data-feather="grid" width="20"></i>
-                        <span>Kelola Lowongan Pekerjaan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{ route('admin.kelolabobot.index') }}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
-                        <span>Kelola Bobot Penilaian</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="table-datatable.html" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
-                        <span>Kelola Penilaian Pelamar</span>
-                    </a>
-                </li>
+                    <li class='sidebar-title'>Main Menu</li>
+                    <li class="sidebar-item ">
+                        <a href="index.html" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class='sidebar-title'>Kelola</li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('admin.kelolauser.index') }}" class='sidebar-link'>
+                            <i data-feather="layout" width="20"></i>
+                            <span>Kelola User</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('admin.kelolates.index') }}" class='sidebar-link'>
+                            <i data-feather="layers" width="20"></i>
+                            <span>Kelola Tes Kemampuan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('admin.kelolaloker.index') }}" class='sidebar-link'>
+                            <i data-feather="grid" width="20"></i>
+                            <span>Kelola Lowongan Pekerjaan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('admin.kelolabobot.index') }}" class='sidebar-link'>
+                            <i data-feather="file-plus" width="20"></i>
+                            <span>Kelola Bobot Penilaian</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="table-datatable.html" class='sidebar-link'>
+                            <i data-feather="file-plus" width="20"></i>
+                            <span>Kelola Penilaian Pelamar</span>
+                        </a>
+                    </li>
 
-                <li class='sidebar-title'>Reports</li>
-                <li class="sidebar-item  ">
-                    <a href="table-datatable.html" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
-                        <span>Laporan</span>
-                    </a>
-                </li>
+                    <li class='sidebar-title'>Reports</li>
+                    <li class="sidebar-item  ">
+                        <a href="table-datatable.html" class='sidebar-link'>
+                            <i data-feather="file-plus" width="20"></i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </div>
