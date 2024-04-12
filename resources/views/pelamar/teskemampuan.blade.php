@@ -5,16 +5,48 @@
         <div class="card">
             <div class="card-header bg-primary">
                 <h3 class="text-white">Tes Kemampuan</h3>
-                <p>Berakhir Pada Tanggal : {{ \Carbon\Carbon::parse($tes->loker->tanggal_berakhir)->locale('id_ID')->isoFormat('D MMMM Y') }}</p>
+                <p class="text-white">Berakhir Pada Tanggal :
+                    {{ \Carbon\Carbon::parse($tes->lowongan->tanggal_berakhir)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                </p>
+                <a href="{{ route('pelamar.dashboard') }}" class="btn btn-secondary text-white">
+                    <div class="d-flex align-items-center">
+                        <i data-feather="chevron-left" width="20"></i>
+                        Kembali
+                    </div>
+                </a>
             </div>
             <div class="card-body">
                 <div class="text-center mt-3">
                     <a href="" id="mulai_tes" class="btn btn-primary">Mulai Tes ?</a>
                 </div>
                 <div id="tes" style="display: none;">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, culpa! Facilis enim culpa, modi,
-                        incidunt reiciendis officia suscipit porro libero veniam quaerat dolorum quisquam magni placeat
-                        nihil provident! Accusantium, rerum!</p>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <p>{{ $tes->keterangan }}</p>
+                    <div class="text-right">
+                        <a href="{{ route('pelamar.download.file', $tes->file_download) }}" class="btn btn-primary">Unduh
+                            File</a>
+                    </div>
+                    <form action="{{ route('pelamar.upload.file', $tes->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="mt-4">
+                            <div class="mb-3">
+                                <label for="file_upload" class="form-label">Upload File</label>
+                                <input type="file" name="file_upload" id="file_upload" class="form-control">
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <button type="submit" class="btn btn-success">Upload</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -22,10 +54,17 @@
 
 
     <script>
-        document.getElementById('mulai_tes').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('tes').style.display = 'block';
-            document.getElementById('mulai_tes').style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('tesDimulai')) {
+                document.getElementById('tes').style.display = 'block';
+                document.getElementById('mulai_tes').style.display = 'none';
+            }
+            document.getElementById('mulai_tes').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('tes').style.display = 'block';
+                document.getElementById('mulai_tes').style.display = 'none';
+                localStorage.setItem('tesDimulai', 'true');
+            });
         });
     </script>
 @endsection

@@ -25,6 +25,6 @@ class LokerModel extends Model
     ];
 
     public function teskemampuan() : HasOne{
-        return $this->hasOne(TesKemampuanModel::class);
+        return $this->hasOne(TesKemampuanModel::class, 'lowongan_id');
     }
 }

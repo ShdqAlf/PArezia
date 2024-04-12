@@ -32,7 +32,7 @@ class KelolaTes extends Controller
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
             $filePath = $file->storeAs('file_tes', $fileName, 'public');
-            $tesKemampuan->file_download = $filePath; // Sesuaikan dengan nama kolom yang benar
+            $tesKemampuan->file_download = $fileName; // Sesuaikan dengan nama kolom yang benar
         }
         $tesKemampuan->save();
         return redirect()->route('admin.kelolates.index')->with('success', 'Tes berhasil ditambahkan');
