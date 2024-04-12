@@ -64,9 +64,9 @@ Jadi nu muncul ngan menu eta di role eta.
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="{{ route('admin.kelolabobot.index') }}" class='sidebar-link'>
+                    <a href="{{ route('admin.kelolakriteria.index') }}" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i>
-                        <span>Kelola Bobot Penilaian</span>
+                        <span>Kelola Kriteria</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
