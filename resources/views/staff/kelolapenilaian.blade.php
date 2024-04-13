@@ -31,12 +31,20 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama }}</td>
                                         <td>{{ $item->lowongan->judul }}</td>
-                                        <td>
-                                            <button class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#tambahModal{{ $item->id }}">
-                                                <i data-feather="plus" width="20"></i>
-                                                Input
-                                            </button>
+                                        <td class="text-center">
+                                            @if ($item->penilaian == null)
+                                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#tambahModal{{ $item->id }}">
+                                                    <i data-feather="plus" width="20"></i>
+                                                    Input
+                                                </button>
+                                            @else
+                                                <button class="btn btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#editModal{{ $item->id }}">
+                                                    <i data-feather="edit" width="20"></i>
+                                                    Edit
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -51,7 +59,8 @@
                         <h3 class="text-white">Hasil Penilaian Pelamar</h3>
                     </div>
                     <div class="card-body mt-3">
-                        <table id="hasil_penilaian_pelamar" class="table table-responsive table-bordered" style="width:100%">
+                        <table id="hasil_penilaian_pelamar" class="table table-responsive table-bordered"
+                            style="width:100%">
                             <thead>
                                 <tr class="bg-secondary text-white">
                                     <th>Nama Pelamar</th>
@@ -86,7 +95,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Pengguna</h5>
+                        <h5 class="modal-title">Tambah Penilaian</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('staff.kelolapenilaian.tambah') }}" method="POST">
@@ -96,7 +105,7 @@
                             @foreach ($kriteria as $row)
                                 <div class="mb-3">
                                     <label for="" class="form-label">Nilai {{ $row->kode_bobot }}</label>
-                                    <input type="number" class="form-control" id="email"
+                                    <input type="text" class="form-control" id="email"
                                         name="nilai_{{ $row->id }}"
                                         placeholder="Masukkan Nilai {{ $row->kode_bobot }}">
                                 </div>
@@ -105,6 +114,40 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Tambah Nilai</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+    @foreach ($pelamar as $item)
+        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Penilaian</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('staff.kelolapenilaian.edit') }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="pelamar_id" value="{{ $item->id }}">
+                        <div class="modal-body">
+                            @foreach ($penilaian as $row)
+                            <input type="hidden" name="penilaian_id" value="{{ $row->id }}">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Nilai {{ $row->kriteria->kode_bobot }}</label>
+                                    <input type="text" class="form-control" id="email"
+                                        name="nilai_{{ $row->kriteria->id }}"
+                                        placeholder="Masukkan Nilai {{ $row->kriteria->kode_bobot }}" value="{{ $row->nilai }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Edit Nilai</button>
                         </div>
                     </form>
                 </div>

@@ -103,5 +103,6 @@ Route::middleware(['auth', 'web'])->group(function () {
 
         // Penilaian
         Route::post('/staff/kelolapenilaian', [PenilaianController::class, 'tambah'])->name('.kelolapenilaian.tambah');
+        Route::put('/staff/kelolapenilaian', [PenilaianController::class, 'edit'])->name('.kelolapenilaian.edit');
     });
 });
