@@ -15,6 +15,7 @@ class PenilaianController extends Controller
         $data = [
             'kriteria' => KriteriaModel::all(),
             'teskemampuan' => TesKemampuanModel::all(),
+            'penilaian' => PenilaianModel::all(),
         ];
         return view('staff.kelolapenilaian', $data);
     }
@@ -39,6 +40,6 @@ class PenilaianController extends Controller
             $penilaian->nilai = $nilai;
             $penilaian->save();
         }
-        return redirect()->route('staff.kelolapenilaian')->with('success', 'Nilai berhasil ditambahkan');
+        return redirect()->route('staff.dashboard')->with('success', 'Nilai berhasil ditambahkan');
     }
 }
