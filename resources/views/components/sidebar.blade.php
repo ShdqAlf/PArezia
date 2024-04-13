@@ -30,7 +30,7 @@ Jadi nu muncul ngan menu eta di role eta.
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ Str::startsWith(request()->path(), 'staff/perhitungan/') ? 'active' : '' }}">
+                        class="sidebar-item {{ Str::startsWith(request()->path(), 'staff/perhitungan') ? 'active' : '' }}">
                         <a href="{{ route('staff.kelola.perhitungan') }}" class='sidebar-link'>
                             <i data-feather="home" width="20"></i>
                             <span>Kelola Perhitungan</span>

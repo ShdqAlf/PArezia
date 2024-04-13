@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         ]);
         PelamarModel::create([
             'nama'=>'Pelamar 1',
-            'user_id'=> 2,
+            'user_id'=> 3,
         ]);
     }
 }
