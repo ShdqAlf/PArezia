@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PenilaianModel extends Model
 {
@@ -33,5 +34,9 @@ class PenilaianModel extends Model
     public function normalisasi()
     {
         return $this->hasOne(NormalisasiModel::class);
+    }
+    public function pelamar()
+    {
+        return $this->hasOne(PelamarModel::class, 'pelamar_id');
     }
 }
