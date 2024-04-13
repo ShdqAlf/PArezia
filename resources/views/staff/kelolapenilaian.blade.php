@@ -25,17 +25,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($teskemampuan as $teskemampuan)
+                    @foreach ($teskemampuan as $index => $tes)
                     <tr>
-                        <td>1</td>
-                        <td>{{ $teskemampuan->pelamar->nama }}</td>
-                        @foreach ($penilaian as $penilaian)
-                        <td>{{ $penilaian->nilai }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $tes->pelamar->nama ?? "" }}</td>
+                        @foreach ($penilaian as $nilai)
+                        <td>{{ $nilai->nilai }}</td>
                         @endforeach
                         <td></td>
                         <td></td>
                         <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahModal{{ $teskemampuan->id }}">Tambah</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahModal{{ $tes->id }}">Tambah</button>
                         </td>
                     </tr>
                     @endforeach
@@ -52,7 +52,7 @@
 </script>
 
 @foreach ($teskemampuan as $tes)
-<div class="modal fade" id="tambahModal{{ $teskemampuan->id }}" tabindex="-1">
+<div class="modal fade" id="tambahModal{{ $tes->id }}" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,9 +61,9 @@
             </div>
             <form action="{{ route('staff.kelolapenilaian.tambah') }}" method="POST">
                 @csrf
-                <input type="hidden" value="{{ $teskemampuan->id }}" name="teskemampuan_id">
+                <input type="hidden" value="{{ $tes->id }}" name="teskemampuan_id">
                 <div class="modal-body">
-                    @foreach ($kriteria as $key => $row)
+                    @foreach ($kriteria as $row)
                     <div class="mb-3">
                         <label for="" class="form-label">Nilai {{ $row->kode_bobot }}</label>
                         <input type="number" class="form-control" id="email" name="nilai_{{ $row->id }}" placeholder="Masukkan Nilai {{ $row->kode_bobot }}">
