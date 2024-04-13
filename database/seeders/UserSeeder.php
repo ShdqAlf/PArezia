@@ -23,11 +23,11 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'role' => 'Admin'
         ]);
-        // User::create([
-        //     'email' => 'staff@gmail.com',
-        //     'password' => bcrypt('password'),
-        //     'role' => 'Staff'
-        // ]);
+        User::create([
+            'email' => 'staff@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'Staff'
+        ]);
         // User::create([
         //     'email' => 'pimpinan@gmail.com',
         //     'password' => bcrypt('password'),

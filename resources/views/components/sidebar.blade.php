@@ -21,13 +21,22 @@ Jadi nu muncul ngan menu eta di role eta.
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li
-                    class="sidebar-item {{ 'pelamar' == request()->path() ? 'active' : '' }}  {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
-                    <a href="{{ route('pelamar.dashboard') }}" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
-                        <span>Lowongan Pekerjaan</span>
-                    </a>
-                </li>
+                @if (Auth::user()->role == 'Staff')
+                    <li
+                        class="sidebar-item {{ 'staff' == request()->path() ? 'active' : '' }} {{ Str::startsWith(request()->path(), 'pelamar/teskemampuan/') ? 'active' : '' }}">
+                        <a href="{{ route('staff.dashboard') }}" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Kelola Penilaian</span>
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ Str::startsWith(request()->path(), 'staff/perhitungan/') ? 'active' : '' }}">
+                        <a href="{{ route('staff.kelola.perhitungan') }}" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Kelola Perhitungan</span>
+                        </a>
+                    </li>
+                @endif
                 @if (Auth::user()->role == 'Pelamar')
                     <li class='sidebar-title'>Main Menu</li>
                     <li
@@ -73,7 +82,7 @@ Jadi nu muncul ngan menu eta di role eta.
                         </a>
                     </li>
                     <li class="sidebar-item  ">
-                        <a href="{{ route('admin.kelolabobot.index') }}" class='sidebar-link'>
+                        <a href="{{ route('admin.kelolakriteria.index') }}" class='sidebar-link'>
                             <i data-feather="file-plus" width="20"></i>
                             <span>Kelola Bobot Penilaian</span>
                         </a>

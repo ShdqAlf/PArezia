@@ -10,6 +10,8 @@ use App\Http\Controllers\Pelamar\LaporanHasilController;
 use App\Http\Controllers\Pelamar\PelamarController;
 use App\Http\Controllers\Pelamar\TesController;
 use App\Http\Controllers\Pimpinan\PimpinanController;
+use App\Http\Controllers\Staff\PenilaianController;
+use App\Http\Controllers\Staff\PerhitunganController;
 use App\Http\Controllers\Staff\StaffController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +95,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     // staff
     Route::middleware('role:Staff')->prefix('/staff')->name('staff')->group(function () {
         // dashboard
-        Route::get('/', [StaffController::class, 'index'])->name('.dashboard');
+        Route::get('/', [PenilaianController::class, 'index'])->name('.dashboard');
+        Route::get('/perhitungan', [PerhitunganController::class, 'index'])->name('.kelola.perhitungan');
     });
 });
