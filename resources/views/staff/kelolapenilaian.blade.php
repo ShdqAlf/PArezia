@@ -61,7 +61,7 @@
             </div>
             <form action="{{ route('staff.kelolapenilaian.tambah') }}" method="POST">
                 @csrf
-                <input type="text" value="{{ $teskemampuan->id }}">
+                <input type="text" value="{{ $teskemampuan->id }}" name="teskemampuan_id">
                 <div class="modal-body">
                     @foreach ($kriteria as $key => $row)
                     <div class="mb-3">

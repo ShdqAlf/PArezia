@@ -35,6 +35,7 @@ class PenilaianController extends Controller
         foreach ($nilaiArray as $kode_bobot => $nilai) {
             $penilaian = new PenilaianModel();
             $penilaian->kriteria_id = $kode_bobot;
+            $penilaian->teskemampuan_id = $request->input('teskemampuan_id');
             $penilaian->nilai = $nilai;
             $penilaian->save();
         }
