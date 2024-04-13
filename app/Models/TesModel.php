@@ -30,6 +30,6 @@ class TesModel extends Model
 
     public function pelamar(): HasOne
     {
-        return $this->hasOne(PelamarModel::class, 'pelamar_id');
+        return $this->hasOne(PelamarModel::class, 'tes_id');
     }
 }

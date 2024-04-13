@@ -31,8 +31,8 @@ class PelamarModel extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tes(): HasOne
+    public function teskemampuan(): HasOne
     {
-        return $this->hasOne(TesModel::class, 'pelamar_id');
+        return $this->hasOne(TesModel::class, 'tes_id');
     }
 }

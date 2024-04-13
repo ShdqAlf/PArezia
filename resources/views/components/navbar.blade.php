@@ -35,7 +35,7 @@
                         <div class="avatar mr-1">
                             <img src="{{ asset('assets/images/avatar/avatar-s-1.png') }}" alt="" srcset="">
                         </div>
-                        <div class="d-none d-md-block d-lg-inline-block">{{ $pelamar->nama }}</div>
+                        <div class="d-none d-md-block d-lg-inline-block">{{ Auth::user()->pelamar->nama }}</div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>

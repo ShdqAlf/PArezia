@@ -17,6 +17,12 @@
             padding: 10px;
             border-radius: 10px;
         }
+
+        .info-a-tes-id {
+            background-color: #39DA8A;
+            padding: 10px;
+            border-radius: 10px;
+        }
     </style>
     <div class="page-title">
         <h3>Dashboard</h3>
@@ -28,9 +34,18 @@
                 <h3 class="text-white">Lowongan Pekerjaan</h3>
             </div>
             <div class="card-body">
+                @php
+                    $user = Auth::user();
+                @endphp
+
                 @foreach ($lowongans as $item)
                     @php
                         $testExists = $item->teskemampuan()->exists();
+                        $pelamar = $user
+                            ->pelamar()
+                            ->where('lowongan_id', $item->id)
+                            ->first();
+                        $pelamarv = $user->pelamar()->first();
                     @endphp
 
                     <div class="card mt-3 bg-primary">
@@ -45,26 +60,36 @@
                             </div>
                             <div class="text-end">
                                 @if ($testExists)
-                                    @if ($item->teskemampuan->file_upload == null)
-                                        <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
-                                            class="{{ $testExists ? '' : 'disabled' }} info-a text-white"
-                                            onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">Ikuti Tes
-                                            Kemampuan
-                                        </a>
+                                    @if ($pelamar)
+                                        @if ($pelamarv->tes_id != null)
+                                            @if ($pelamarv->file_upload != null)
+                                                <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                            @else
+                                                <a href="#" onclick="existsTes()" class="info-a text-white">Ikuti Tes
+                                                    Kemampuan</a>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('pelamar.test.kemampuan', $item->id) }}"
+                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                        @endif
                                     @else
-                                        <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                        @if ($pelamarv->lowongan_id == null)
+                                            <a href="{{ route('pelamar.test.kemampuan', $item->id) }}"
+                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                        @else
+                                            <a href="#" onclick="existsTes()" class="info-a text-white">Ikuti Tes
+                                                Kemampuan</a>
+                                        @endif
                                     @endif
                                 @else
-                                    <a href="{{ $testExists ? route('pelamar.test.kemampuan', $item->id) : '#' }}"
-                                        class="{{ $testExists ? '' : 'disabled' }} info-a text-white"
-                                        onclick="{{ $testExists ? '' : 'showSweetAlert(); return false;' }}">Ikuti Tes
-                                        Kemampuan
-                                    </a>
+                                    ZOnk
                                 @endif
+
                             </div>
                         </div>
                     </div>
                 @endforeach
+
             </div>
         </div>
     </section>
@@ -76,6 +101,14 @@
                 icon: 'warning',
                 title: 'Test Kemampuan Tidak Tersedia',
                 text: 'Maaf, test kemampuan untuk lowongan ini belum tersedia.',
+            });
+        }
+
+        function existsTes() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Tes Sudah Ada',
+                text: 'Maaf, kamu sudah mengikuti tes sebelumnya harap menunggu hasil.',
             });
         }
     </script>

@@ -28,7 +28,7 @@ class PelamarController extends Controller
             ->get();
         $data = [
             "lowongans" => $lowongans,
-            "pelamar" => $pelamar,
+            // "pelamar" => $pelamar,
         ];
         return view('pelamar.lowongan', $data);
     }

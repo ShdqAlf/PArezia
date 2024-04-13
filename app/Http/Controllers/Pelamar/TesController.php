@@ -34,6 +34,7 @@ class TesController extends Controller
         $Idpelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $pelamar = PelamarModel::find($Idpelamar->id);
         $tes = TesModel::find($id);
+        $lowongan = LokerModel::find($id);
         $request->validate([
             'file_upload' => 'required|mimes:pdf,word,zip,rar|max:5080',
         ], [
@@ -46,7 +47,8 @@ class TesController extends Controller
             $filename = $file->getClientOriginalName();
             $file->storeAs('file_upload/', $filename, 'public');
             $pelamar->file_upload = $filename;
-            $pelamar->tes_id = $tes;
+            $pelamar->tes_id = $tes->id;
+            $pelamar->lowongan_id = $lowongan->id;
             $pelamar->save();
             alert()->success('Tes Berhasil Diupload');
             return redirect()->route('pelamar.dashboard');
