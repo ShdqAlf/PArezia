@@ -55,7 +55,6 @@ Jadi nu muncul ngan menu eta di role eta.
                     </li>
                 @endif
                 @if (Auth::user()->role == 'Admin')
-<<<<<<< HEAD
                 <li class='sidebar-title'>Main Menu</li>
                 <li class="sidebar-item ">
                     <a href="index.html" class='sidebar-link'>
@@ -94,46 +93,6 @@ Jadi nu muncul ngan menu eta di role eta.
                         <span>Kelola Penilaian Pelamar</span>
                     </a>
                 </li>
-=======
-                    <li class='sidebar-title'>Main Menu</li>
-                    <li class="sidebar-item ">
-                        <a href="index.html" class='sidebar-link'>
-                            <i data-feather="home" width="20"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class='sidebar-title'>Kelola</li>
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('admin.kelolauser.index') }}" class='sidebar-link'>
-                            <i data-feather="layout" width="20"></i>
-                            <span>Kelola User</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('admin.kelolates.index') }}" class='sidebar-link'>
-                            <i data-feather="layers" width="20"></i>
-                            <span>Kelola Tes Kemampuan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('admin.kelolaloker.index') }}" class='sidebar-link'>
-                            <i data-feather="grid" width="20"></i>
-                            <span>Kelola Lowongan Pekerjaan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('admin.kelolakriteria.index') }}" class='sidebar-link'>
-                            <i data-feather="file-plus" width="20"></i>
-                            <span>Kelola Bobot Penilaian</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="table-datatable.html" class='sidebar-link'>
-                            <i data-feather="file-plus" width="20"></i>
-                            <span>Kelola Penilaian Pelamar</span>
-                        </a>
-                    </li>
->>>>>>> bdeb121ba9f165e1252c42fab049b47a7799d150
 
                     <li class='sidebar-title'>Reports</li>
                     <li class="sidebar-item  ">
