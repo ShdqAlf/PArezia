@@ -102,6 +102,6 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/perhitungan', [PerhitunganController::class, 'index'])->name('.kelola.perhitungan');
 
         // Penilaian
-        Route::post('/kelolapenilaian/tambah-penilaian', [PenilaianController::class, 'tambah'])->name('.kelolapenilaian.tambah');
+        Route::post('/staff/kelolapenilaian', [PenilaianController::class, 'index'])->name('staff.kelolapenilaian');
     });
 });
