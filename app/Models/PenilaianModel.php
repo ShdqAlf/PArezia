@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PenilaianModel extends Model
 {
     use HasFactory;
+    protected $table = 'penilaian';
 
     protected $fillable = [
         'nilai',
@@ -19,6 +20,7 @@ class PenilaianModel extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
     public function pelamar()
     {
         return $this->belongsTo(PelamarModel::class);
