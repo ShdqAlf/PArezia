@@ -29,8 +29,8 @@
                     <tr>
                         <td>1</td>
                         <td>{{ $teskemampuan->pelamar->nama }}</td>
-                        @foreach ($kriteria as $key => $row)
-                        <td></td>
+                        @foreach ($penilaian as $penilaian)
+                        <td>{{ $penilaian->nilai }}</td>
                         @endforeach
                         <td></td>
                         <td></td>
