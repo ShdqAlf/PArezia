@@ -12,10 +12,13 @@ class PenilaianController extends Controller
 {
     public function index()
     {
+        $kriteria = KriteriaModel::all();
+        $teskemampuan = TesKemampuanModel::all();
+        $penilaian = PenilaianModel::whereIn('teskemampuan_id', $teskemampuan->pluck('id'))->get();
         $data = [
-            'kriteria' => KriteriaModel::all(),
-            'teskemampuan' => TesKemampuanModel::all(),
-            'penilaian' => PenilaianModel::all(),
+            'kriteria' => $kriteria,
+            'teskemampuan' => $teskemampuan,
+            'penilaian' => $penilaian,
         ];
         return view('staff.kelolapenilaian', $data);
     }

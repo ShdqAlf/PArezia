@@ -19,8 +19,11 @@ return new class extends Migration
             $table->string('foto_profil')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
+            $table->string('file_upload')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('tes_id')->nullable();
+            $table->foreign('tes_id')->references('id')->on('teskemampuan')->onDelete('cascade');
             $table->timestamps();
         });
     }
