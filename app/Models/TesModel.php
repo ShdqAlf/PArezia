@@ -29,12 +29,8 @@ class TesModel extends Model
         return $this->belongsTo(LokerModel::class, 'lowongan_id');
     }
 
-    public function pelamar(): BelongsTo
+    public function pelamar(): HasOne
     {
-<<<<<<< HEAD
         return $this->hasOne(PelamarModel::class, 'tes_id');
-=======
-        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
->>>>>>> 591a5c4449b18c818bcfa03d360d49c350cbd965
     }
 }

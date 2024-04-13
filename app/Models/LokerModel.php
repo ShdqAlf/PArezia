@@ -24,12 +24,10 @@ class LokerModel extends Model
         'updated_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
-    public function teskemampuan() : HasOne{
-=======
+
+
     public function teskemampuan(): HasOne
     {
->>>>>>> 591a5c4449b18c818bcfa03d360d49c350cbd965
         return $this->hasOne(TesModel::class, 'lowongan_id');
     }
 }
