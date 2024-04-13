@@ -60,7 +60,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('staff.kelolapenilaian.tambah') }}" method="POST">
-
                 @csrf
                 <input type="hidden" value="{{ $teskemampuan->id }}" name="teskemampuan_id">
                 <div class="modal-body">
