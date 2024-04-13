@@ -33,7 +33,6 @@ class TesController extends Controller
         $user_id = auth()->user();
         $Idpelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $pelamar = PelamarModel::find($Idpelamar->id);
-        $tes = TesModel::find($id);
         $lowongan = LokerModel::find($id);
         $request->validate([
             'file_upload' => 'required|mimes:pdf,word,zip,rar|max:5080',
@@ -42,12 +41,13 @@ class TesController extends Controller
             'file_upload.mimes' => 'Format File Wajib Berupa PDF,WORD,ZIP, dan RAR.',
             'file_upload.max' => 'Ukuran File Maksimal 5MB.',
         ]);
+        $tes = $request->input('tes_id');
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $filename = $file->getClientOriginalName();
             $file->storeAs('file_upload/', $filename, 'public');
             $pelamar->file_upload = $filename;
-            $pelamar->tes_id = $tes->id;
+            $pelamar->tes_id = $tes;
             $pelamar->lowongan_id = $lowongan->id;
             $pelamar->save();
             alert()->success('Tes Berhasil Diupload');

@@ -37,6 +37,6 @@ class PenilaianModel extends Model
     }
     public function pelamar()
     {
-        return $this->hasOne(PelamarModel::class, 'pelamar_id');
+        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
     }
 }

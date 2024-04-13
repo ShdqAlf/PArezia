@@ -19,6 +19,7 @@ class PelamarModel extends Model
         'tempat_lahir',
         'file_upload',
         'user_id',
+        'lowongan_id',
         'tes_id',
     ];
     protected $casts = [
@@ -30,9 +31,16 @@ class PelamarModel extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function teskemampuan(): HasOne
+    public function lowongan(): BelongsTo
     {
-        return $this->hasOne(TesModel::class, 'tes_id');
+        return $this->belongsTo(LokerModel::class);
+    }
+    public function teskemampuan(): BelongsTo
+    {
+        return $this->belongsTo(TesModel::class, 'tes_id');
+    }
+    public function penilaian(): HasOne
+    {
+        return $this->hasOne(PenilaianModel::class);
     }
 }

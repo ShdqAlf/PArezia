@@ -14,12 +14,10 @@ class PenilaianController extends Controller
     public function index()
     {
         $kriteria = KriteriaModel::all();
-        $teskemampuan = TesModel::all();
         $penilaian = PenilaianModel::all();
-        $pelamar = PelamarModel::all();
+        $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->get();
         $data = [
             'kriteria' => $kriteria,
-            'teskemampuan' => $teskemampuan,
             'penilaian' => $penilaian,
             'pelamar' => $pelamar,
         ];
@@ -42,7 +40,7 @@ class PenilaianController extends Controller
         foreach ($nilaiArray as $kriteria_id => $nilai) {
             $penilaian = new PenilaianModel();
             $penilaian->kriteria_id = $kriteria_id; // Menggunakan $kriteria_id
-            $penilaian->pelamar_id = $request->input('teskemampuan_id');
+            $penilaian->pelamar_id = $request->input('pelamar_id');
             $penilaian->nilai = $nilai;
             $penilaian->save();
         }

@@ -1,4 +1,4 @@
-@extends('components.home', ['title' => 'Halaman Pelemar'])
+@extends('components.home', ['title' => 'Laporan Hasil = Pelamar'])
 
 @section('head')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css">

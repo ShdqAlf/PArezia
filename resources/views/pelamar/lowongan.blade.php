@@ -1,4 +1,4 @@
-@extends('components.home', ['title' => 'Halaman Pelemar'])
+@extends('components.home', ['title' => 'Lowongan - Pelamar'])
 
 @section('content')
     <style>
@@ -82,7 +82,8 @@
                                         @endif
                                     @endif
                                 @else
-                                    ZOnk
+                                <a href="#" onclick="showSweetAlert()" class="info-a text-white">Ikuti Tes
+                                    Kemampuan</a>
                                 @endif
 
                             </div>

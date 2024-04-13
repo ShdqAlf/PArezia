@@ -1,4 +1,4 @@
-@extends('components.home', ['title' => 'Halaman Pelemar'])
+@extends('components.home', ['title' => 'Tes Kemampuan - Pelamar'])
 
 @section('content')
     <section class="section">
@@ -37,6 +37,7 @@
                     <form action="{{ route('pelamar.upload.file', $tes->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="tes_id" value="{{ $tes->id }}">
                         <div class="mt-4">
                             <div class="mb-3">
                                 <label for="file_upload" class="form-label">Upload File</label>

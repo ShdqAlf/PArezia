@@ -30,4 +30,8 @@ class LokerModel extends Model
     {
         return $this->hasOne(TesModel::class, 'lowongan_id');
     }
+    public function pelamar(): HasOne
+    {
+        return $this->hasOne(PelamarModel::class);
+    }
 }
