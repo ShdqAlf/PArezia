@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\TesKemampuanModel;
+use App\Models\TesModel;
 use App\Models\LokerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +12,7 @@ class KelolaTes extends Controller
 {
     public function index()
     {
-        $tesKemampuan = TesKemampuanModel::all();
+        $tesKemampuan = TesModel::all();
         $loker = LokerModel::all();
 
         $data = [
@@ -24,14 +24,14 @@ class KelolaTes extends Controller
 
     public function tambahTes(Request $request)
     {
-        $tesKemampuan = new TesKemampuanModel();
+        $tesKemampuan = new TesModel();
         $tesKemampuan->keterangan = $request->keterangan;
         $tesKemampuan->lowongan_id = $request->judul;
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
-            $filePath = $file->storeAs('file_tes', $fileName, 'public');
+            $file->storeAs('file_tes', $fileName, 'public');
             $tesKemampuan->file_download = $fileName; // Sesuaikan dengan nama kolom yang benar
         }
         $tesKemampuan->save();
@@ -40,13 +40,13 @@ class KelolaTes extends Controller
 
     public function hapusTes($id)
     {
-        $tesKemampuan = teskemampuanModel::findOrFail($id);
+        $tesKemampuan = TesModel::findOrFail($id);
         $tesKemampuan->delete();
 
         return redirect()->route('admin.kelolates.index')->with('success', 'Data tes berhasil dihapus');
     }
 
-    public function edit(Request $request, TesKemampuanModel $tes)
+    public function edit(Request $request, TesModel $tes)
     {
         $tes->update([
             'keterangan' => $request->keterangan,

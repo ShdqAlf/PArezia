@@ -17,7 +17,9 @@ class PelamarModel extends Model
         'alamat',
         'tanggal_lahir',
         'tempat_lahir',
+        'file_upload',
         'user_id',
+        'tes_id',
     ];
     protected $casts = [
         'created_at' => 'datetime',
@@ -29,8 +31,8 @@ class PelamarModel extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function teskemampuan(): HasOne
+    public function tes(): HasOne
     {
-        return $this->hasOne(TesKemampuanModel::class, 'pelamar_id');
+        return $this->hasOne(TesModel::class, 'pelamar_id');
     }
 }

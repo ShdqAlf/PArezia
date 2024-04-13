@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\TesModel;
 use Illuminate\Http\Request;
 use App\Models\KriteriaModel;
-use App\Models\TesKemampuanModel;
 use App\Models\PenilaianModel;
 
 class PenilaianController extends Controller
@@ -13,7 +13,7 @@ class PenilaianController extends Controller
     public function index()
     {
         $kriteria = KriteriaModel::all();
-        $teskemampuan = TesKemampuanModel::all();
+        $teskemampuan = TesModel::all();
         $penilaian = PenilaianModel::whereIn('teskemampuan_id', $teskemampuan->pluck('id'))->get();
         $data = [
             'kriteria' => $kriteria,

@@ -7,18 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class TesKemampuanModel extends Model
+class TesModel extends Model
 {
     use HasFactory;
-
     protected $table = 'teskemampuan';
 
     protected $fillable = [
         'keterangan',
         'file_download',
-        'file_upload',
         'lowongan_id',
-        'pelamar_id',
     ];
 
     protected $casts = [
@@ -31,8 +28,8 @@ class TesKemampuanModel extends Model
         return $this->belongsTo(LokerModel::class, 'lowongan_id');
     }
 
-    public function pelamar(): BelongsTo
+    public function pelamar(): HasOne
     {
-        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
+        return $this->hasOne(PelamarModel::class, 'pelamar_id');
     }
 }

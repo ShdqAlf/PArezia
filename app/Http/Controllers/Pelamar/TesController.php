@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Pelamar;
 use App\Http\Controllers\Controller;
 use App\Models\LokerModel;
 use App\Models\PelamarModel;
-use App\Models\TesKemampuanModel;
+use App\Models\TesModel;
 use Illuminate\Http\Request;
 
 class TesController extends Controller
@@ -15,7 +15,7 @@ class TesController extends Controller
         $user_id = auth()->user();
         $pelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $lowongan = LokerModel::find($id);
-        $tes = TesKemampuanModel::where('lowongan_id', $lowongan->id)->first();
+        $tes = TesModel::where('lowongan_id', $lowongan->id)->first();
         $data = [
             'tes' => $tes,
             'pelamar' => $pelamar,
@@ -31,8 +31,9 @@ class TesController extends Controller
     public function uploadFile(Request $request, $id)
     {
         $user_id = auth()->user();
-        $pelamar = PelamarModel::where('user_id', $user_id->id)->first();
-        $tes = TesKemampuanModel::find($id);
+        $Idpelamar = PelamarModel::where('user_id', $user_id->id)->first();
+        $pelamar = PelamarModel::find($Idpelamar->id);
+        $tes = TesModel::find($id);
         $request->validate([
             'file_upload' => 'required|mimes:pdf,word,zip,rar|max:5080',
         ], [
@@ -40,14 +41,13 @@ class TesController extends Controller
             'file_upload.mimes' => 'Format File Wajib Berupa PDF,WORD,ZIP, dan RAR.',
             'file_upload.max' => 'Ukuran File Maksimal 5MB.',
         ]);
-
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $filename = $file->getClientOriginalName();
             $file->storeAs('file_upload/', $filename, 'public');
-            $tes->file_upload = $filename;
-            $tes->pelamar_id = $pelamar->id;
-            $tes->save();
+            $pelamar->file_upload = $filename;
+            $pelamar->tes_id = $tes;
+            $pelamar->save();
             alert()->success('Tes Berhasil Diupload');
             return redirect()->route('pelamar.dashboard');
         } else {

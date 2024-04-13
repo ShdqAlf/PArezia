@@ -23,7 +23,7 @@ class PenilaianModel extends Model
 
     public function teskemampuan()
     {
-        return $this->belongsTo(TesKemampuanModel::class);
+        return $this->belongsTo(TesModel::class);
     }
 
     public function kriteria()
