@@ -12,7 +12,7 @@ class PenilaianModel extends Model
 
     protected $fillable = [
         'nilai',
-        'pelamar_id',
+        'teskemampuan_id',
         'kriteria_id',
     ];
 
@@ -21,9 +21,9 @@ class PenilaianModel extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function pelamar()
+    public function teskemampuan()
     {
-        return $this->belongsTo(PelamarModel::class);
+        return $this->belongsTo(TesKemampuanModel::class);
     }
 
     public function kriteria()
