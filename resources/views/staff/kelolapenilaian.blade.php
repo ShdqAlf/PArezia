@@ -35,7 +35,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahModal{{ $row->id }}">Tambah</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahModal{{ $teskemampuan->id }}">Tambah</button>
                         </td>
                     </tr>
                     @endforeach
@@ -51,8 +51,8 @@
     new DataTable('#kelola_penilaian');
 </script>
 
-@foreach ($teskemampuan as $teskemampuan)
-<div class="modal fade" id="tambahModal{{ $row->id }}" tabindex="-1">
+@foreach ($teskemampuan as $tes)
+<div class="modal fade" id="tambahModal{{ $teskemampuan->id }}" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,8 +60,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('staff.kelolapenilaian.tambah') }}" method="POST">
+
                 @csrf
-                <input type="hidden" value="{{ $row->id }}" name="teskemampuan_id">
+                <input type="hidden" value="{{ $teskemampuan->id }}" name="teskemampuan_id">
                 <div class="modal-body">
                     @foreach ($kriteria as $key => $row)
                     <div class="mb-3">

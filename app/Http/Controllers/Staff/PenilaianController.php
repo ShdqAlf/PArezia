@@ -32,14 +32,13 @@ class PenilaianController extends Controller
         }
 
         // Menyimpan nilai-nilai ke dalam database
-        foreach ($nilaiArray as $kode_bobot => $nilai) {
+        foreach ($nilaiArray as $kriteria_id => $nilai) {
             $penilaian = new PenilaianModel();
-            $penilaian->kriteria_id = $kode_bobot;
+            $penilaian->kriteria_id = $kriteria_id; // Menggunakan $kriteria_id
             $penilaian->teskemampuan_id = $request->input('teskemampuan_id');
             $penilaian->nilai = $nilai;
             $penilaian->save();
         }
-
         return redirect()->route('staff.kelolapenilaian')->with('success', 'Nilai berhasil ditambahkan');
     }
 }
