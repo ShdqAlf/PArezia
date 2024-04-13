@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KelolaUser;
 use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Admin\KelolaLokerController;
-use App\Http\Controllers\Admin\KelolaBobotController;
+use App\Http\Controllers\Admin\KelolaKriteriaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\LaporanHasilController;
 use App\Http\Controllers\Pelamar\PelamarController;
@@ -81,7 +81,10 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::put('/kelolaloker/{row}', [KelolaLokerController::class, 'editLoker'])->name('.kelolaloker.edit');
 
         // kelola bobot
-        Route::get('/kelolabobot', [KelolaBobotController::class, 'index'])->name('.kelolabobot.index');
+        Route::get('/kelolakriteria', [KelolaKriteriaController::class, 'index'])->name('.kelolakriteria.index');
+        Route::post('/kelolakriteria/tambah-kriteria', [KelolaKriteriaController::class, 'tambah'])->name('.kelolakriteria.tambah');
+        Route::delete('/kelolakriteria/{id}', [KelolaKriteriaController::class, 'hapus'])->name('.kelolakriteria.hapus-kriteria');
+        Route::put('/kelolakriteria/{row}', [KelolaKriteriaController::class, 'edit'])->name('.kelolakriteria.edit');
     });
 
 
