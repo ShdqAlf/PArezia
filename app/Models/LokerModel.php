@@ -24,7 +24,8 @@ class LokerModel extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function teskemampuan() : HasOne{
-        return $this->hasOne(TesKemampuanModel::class, 'lowongan_id');
+    public function teskemampuan(): HasOne
+    {
+        return $this->hasOne(TesModel::class, 'lowongan_id');
     }
 }

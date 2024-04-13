@@ -15,7 +15,8 @@ class TesModel extends Model
     protected $fillable = [
         'keterangan',
         'file_download',
-        'lowongan_id',
+        'pelamar_id',
+        'lowongan_id'
     ];
 
     protected $casts = [
@@ -28,8 +29,8 @@ class TesModel extends Model
         return $this->belongsTo(LokerModel::class, 'lowongan_id');
     }
 
-    public function pelamar(): HasOne
+    public function pelamar(): BelongsTo
     {
-        return $this->hasOne(PelamarModel::class, 'pelamar_id');
+        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
     }
 }

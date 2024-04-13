@@ -7,6 +7,7 @@ use App\Models\TesModel;
 use Illuminate\Http\Request;
 use App\Models\KriteriaModel;
 use App\Models\PenilaianModel;
+use App\Models\PelamarModel;
 
 class PenilaianController extends Controller
 {
@@ -14,11 +15,13 @@ class PenilaianController extends Controller
     {
         $kriteria = KriteriaModel::all();
         $teskemampuan = TesModel::all();
-        $penilaian = PenilaianModel::whereIn('teskemampuan_id', $teskemampuan->pluck('id'))->get();
+        $penilaian = PenilaianModel::all();
+        $pelamar = PelamarModel::all();
         $data = [
             'kriteria' => $kriteria,
             'teskemampuan' => $teskemampuan,
             'penilaian' => $penilaian,
+            'pelamar' => $pelamar,
         ];
         return view('staff.kelolapenilaian', $data);
     }
@@ -39,7 +42,7 @@ class PenilaianController extends Controller
         foreach ($nilaiArray as $kriteria_id => $nilai) {
             $penilaian = new PenilaianModel();
             $penilaian->kriteria_id = $kriteria_id; // Menggunakan $kriteria_id
-            $penilaian->teskemampuan_id = $request->input('teskemampuan_id');
+            $penilaian->pelamar_id = $request->input('teskemampuan_id');
             $penilaian->nilai = $nilai;
             $penilaian->save();
         }
