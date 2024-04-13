@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('penilaian', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('nilai');
+            $table->unsignedBigInteger('teskemampuan_id')->nullable();
+            $table->foreign('teskemampuan_id')->references('id')->on('teskemampuan')->onDelete('cascade');
+            $table->unsignedBigInteger('kriteria_id')->nullable();
+            $table->foreign('kriteria_id')->references('id')->on('kriteria')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('penilaian');
     }
 };

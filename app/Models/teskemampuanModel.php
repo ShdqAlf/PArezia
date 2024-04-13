@@ -28,6 +28,11 @@ class TesKemampuanModel extends Model
 
     public function lowongan(): BelongsTo
     {
-        return $this->belongsTo(LokerModel::class,'lowongan_id');
+        return $this->belongsTo(LokerModel::class, 'lowongan_id');
+    }
+
+    public function pelamar(): BelongsTo
+    {
+        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
     }
 }

@@ -57,6 +57,20 @@
                         <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out"></i> Logout</a>
                     </div>
                 </li>
+            @elseif(Auth::user()->role == 'Staff')
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <div class="avatar mr-1">
+                            <img src="{{ asset('assets/images/avatar/avatar-s-1.png') }}" alt="" srcset="">
+                        </div>
+                        <div class="d-none d-md-block d-lg-inline-block">John Wick</div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out"></i> Logout</a>
+                    </div>
+                </li>
             @endif
         </ul>
     </div>
