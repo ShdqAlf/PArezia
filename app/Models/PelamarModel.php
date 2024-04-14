@@ -41,6 +41,6 @@ class PelamarModel extends Model
     }
     public function penilaian(): HasOne
     {
-        return $this->hasOne(PenilaianModel::class);
+        return $this->hasOne(PenilaianModel::class, 'pelamar_id');
     }
 }

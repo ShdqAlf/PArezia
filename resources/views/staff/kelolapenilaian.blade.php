@@ -110,6 +110,38 @@
 @endforeach
 
 
+@foreach ($pelamar as $item)
+<div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Penilaian</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('staff.kelolapenilaian.edit') }}" method="POST">
+                @csrf
+                @method('put')
+                <input type="hidden" name="pelamar_id" value="{{ $item->id }}">
+                <div class="modal-body">
+                    @foreach ($penilaian as $row)
+                    <input type="hidden" name="penilaian_id" value="{{ $row->id }}">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Nilai {{ $row->kriteria->kode_bobot }}</label>
+                        <input type="text" class="form-control" id="email" name="nilai_{{ $row->kriteria->id }}" placeholder="Masukkan Nilai {{ $row->kriteria->kode_bobot }}" value="{{ $row->nilai }}">
+                    </div>
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Edit Nilai</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
