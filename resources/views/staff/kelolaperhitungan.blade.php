@@ -55,10 +55,10 @@
 
             <div class="card mb-5">
                 <div class="card-header bg-secondary">
-                    <h3 class="text-white">Nilai QI</h3>
+                    <h3 class="text-white">Perkalian Nilai Bobot</h3>
                 </div>
                 <div class="card-body">
-                    <table id="nilai_qi" class="table table-responsive table-bordered" style="width:100%">
+                    <table id="perkalian" class="table table-responsive table-bordered" style="width:100%">
                         <thead>
                             <tr class="bg-secondary text-white">
                                 <th>Nama Pelamar</th>
@@ -73,56 +73,42 @@
                             @foreach ($penilaian->unique('pelamar_id') as $item)
                             <tr>
                                 <td>{{ $item->pelamar->nama }}</td>
-                                @php
-                                $totalNilai = 0;
-                                @endphp
-                                @foreach ($penilaian->where('pelamar_id', $item->pelamar_id) as $nilai)
-                                <td>{{ $nilai->nilai_bobot }}</td>
-                                @php
-                                $totalNilai += $nilai->nilai_bobot;
-                                @endphp
+                                @foreach ($penilaian->unique('kriteria_id') as $nilai)
+                                <td>{{ isset($multipliedValues[$item->pelamar_id][$nilai->kriteria_id]) ? $multipliedValues[$item->pelamar_id][$nilai->kriteria_id] : '' }}</td>
                                 @endforeach
-                                <td>{{ $totalNilai }}</td>
-                                <td>{{ $totalNilai * 0.5 }}</td>
+                                <td>{{ isset($summedValues[$item->pelamar_id]) ? $summedValues[$item->pelamar_id] : '' }}</td>
+                                <td>{{ isset($multipliedByHalf[$item->pelamar_id]) ? $multipliedByHalf[$item->pelamar_id] : '' }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="card mb-5">
                 <div class="card-header bg-secondary">
-                    <h3 class="text-white">Perkalian</h3>
+                    <h3 class="text-white">Pemangkatan nilai Bobot</h3>
                 </div>
                 <div class="card-body">
-                    <table id="kali" class="table table-responsive table-bordered" style="width:100%">
+                    <table id="pemangkatan" class="table table-responsive table-bordered" style="width:100%">
                         <thead>
                             <tr class="bg-secondary text-white">
                                 <th>Nama Pelamar</th>
                                 @foreach ($penilaian->unique('kriteria_id') as $item)
                                 <th>{{ $item->kriteria->kode_bobot }}</th>
                                 @endforeach
-                                <th>Perkalian</th>
-                                <th>Perkalian * 0.5</th>
+                                <th>CROSS</th>
+                                <th>CROSS * 0.5</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($penilaian->unique('pelamar_id') as $item)
                             <tr>
                                 <td>{{ $item->pelamar->nama }}</td>
-                                @php
-                                $hasilPerhitungan = [];
-                                $hasilPerkalian = 1;
-                                @endphp
-                                @foreach ($penilaian->where('pelamar_id', $item->pelamar_id) as $nilai)
-                                <td>{{ $nilai->nilai_bobot }}</td>
-                                @php
-                                $hasilPerkalian *= $nilai->nilai_bobot;
-                                @endphp
+                                @foreach ($penilaian->unique('kriteria_id') as $nilai)
+                                <td>{{ isset($poweredValues[$item->pelamar_id][$nilai->kriteria_id]) ? $poweredValues[$item->pelamar_id][$nilai->kriteria_id] : '' }}</td>
                                 @endforeach
-                                <td>{{ $hasilPerkalian }}</td>
-                                <td>{{ $hasilPerkalian * 0.5 }}</td>
+                                <td>{{ isset($crossValues[$item->pelamar_id]) ? $crossValues[$item->pelamar_id] : '' }}</td>
+                                <td>{{ isset($multipliedCrossByHalf[$item->pelamar_id]) ? $multipliedCrossByHalf[$item->pelamar_id] : '' }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -138,25 +124,21 @@
                     <table id="perhitungan" class="table table-responsive table-bordered" style="width:100%">
                         <thead>
                             <tr class="bg-secondary text-white">
+                                <th>Nama Pelamar</th>
                                 <th>Nilai QI</th>
                                 <th>Ranking</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                            $totalQI = 0;
-                            @endphp
-                            @foreach ($sum as $pelamarId => $totalNilai)
+                            @foreach ($penilaian->unique('pelamar_id') as $item)
                             <tr>
-                                <td>{{ $totalNilai * 0.5 }}</td>
-                                <td></td>
+                                <td>{{ $item->pelamar->nama }}</td>
+                                <td>{{ $qiValues[$item->pelamar_id] }}</td>
+                                <td>{{ $ranking[$item->pelamar_id] }}</td>
                             </tr>
-                            @php
-                            $totalQI += ($totalNilai * 0.5);
-                            @endphp
                             @endforeach
-                            <!-- Tambahkan baris untuk total QI di sini -->
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -167,7 +149,8 @@
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
 <script>
-    new DataTable('#nilai_qi');
+    new DataTable('#perkalian');
+    new DataTable('#pemangkatan');
     new DataTable('#normalisasi');
     new DataTable('#perhitungan');
 </script>

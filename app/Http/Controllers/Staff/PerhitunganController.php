@@ -19,7 +19,6 @@ class PerhitunganController extends Controller
         // Initialize arrays to store maximum and minimum values
         $max = [];
         $min = [];
-        $sum = [];
 
         // Calculate maximum and minimum values for each criterion
         foreach ($kriteria as $kriteriaItem) {
@@ -29,6 +28,13 @@ class PerhitunganController extends Controller
 
         // Prepare data for view
         $data = [];
+
+        // Initialize arrays to store multiplied and powered values
+        $multipliedValues = [];
+        $poweredValues = [];
+
+        // Initialize array to store summed values
+        $summedValues = [];
 
         // Loop through penilaian to perform calculations
         foreach ($penilaian as $penilaianItem) {
@@ -44,18 +50,75 @@ class PerhitunganController extends Controller
                 $perhitungan = $nilaiMin / $penilaianItem->nilai;
             }
 
-            // Calculate nilai bobot
-            $nilaiBobot = $perhitungan * $kriteriaItem->nilai_bobot;
-
-            // Sum up the nilai bobot based on pelamar_id
-            if (!isset($sum[$penilaianItem->pelamar_id])) {
-                $sum[$penilaianItem->pelamar_id] = 0;
-            }
-            $sum[$penilaianItem->pelamar_id] += $nilaiBobot;
-
             // Store calculated values in penilaianItem
             $penilaianItem->perhitungan = $perhitungan;
-            $penilaianItem->nilai_bobot = $nilaiBobot;
+
+            // Multiply perhitungan with nilai_bobot
+            $nilaiBobot = $kriteriaItem->nilai_bobot;
+            $multipliedValues[$penilaianItem->pelamar_id][$penilaianItem->kriteria_id] = $perhitungan * $nilaiBobot;
+
+            // Power perhitungan with nilai_bobot
+            $poweredValues[$penilaianItem->pelamar_id][$penilaianItem->kriteria_id] = pow($perhitungan, $nilaiBobot);
+
+            // Check if the summed value for this pelamar_id has been initialized
+            if (!isset($summedValues[$penilaianItem->pelamar_id])) {
+                $summedValues[$penilaianItem->pelamar_id] = 0;
+            }
+
+            // Add the multiplied value to the existing summed value
+            $summedValues[$penilaianItem->pelamar_id] += $multipliedValues[$penilaianItem->pelamar_id][$penilaianItem->kriteria_id];
+        }
+
+        // Initialize array to store multiplied values with 0.5
+        $multipliedByHalf = [];
+
+        // Loop through summed values to perform multiplication by 0.5
+        foreach ($summedValues as $pelamarId => $summedValue) {
+            // Multiply the summed value by 0.5
+            $multipliedByHalf[$pelamarId] = $summedValue * 0.5;
+        }
+
+        // Initialize array to store CROSS values
+        $crossValues = [];
+
+        // Loop through powered values to perform multiplication
+        foreach ($poweredValues as $pelamarId => $criteriaValues) {
+            $crossValues[$pelamarId] = array_product($criteriaValues);
+        }
+
+        // Initialize array to store multiplied CROSS values with 0.5
+        $multipliedCrossByHalf = [];
+
+        // Loop through CROSS values to perform multiplication by 0.5
+        foreach ($crossValues as $pelamarId => $crossValue) {
+            // Multiply the CROSS value by 0.5
+            $multipliedCrossByHalf[$pelamarId] = $crossValue * 0.5;
+        }
+
+        // Initialize array to store QI values
+        $qiValues = [];
+
+        // Loop through pelamar to calculate QI values
+        foreach ($pelamar as $pelamarItem) {
+            // Calculate QI value
+            $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
+        }
+
+        // Sort QI values in descending order
+        arsort($qiValues);
+
+        // Initialize array to store ranking values
+        $ranking = [];
+
+        // Calculate ranking
+        $rank = 1;
+        $prevQi = null;
+        foreach ($qiValues as $pelamarId => $qi) {
+            if ($prevQi !== null && $qi !== $prevQi) {
+                $rank++;
+            }
+            $ranking[$pelamarId] = $rank;
+            $prevQi = $qi;
         }
 
         // Pass necessary data to the view
@@ -65,7 +128,14 @@ class PerhitunganController extends Controller
             'pelamar' => $pelamar,
             'max' => $max,
             'min' => $min,
-            'sum' => $sum,
+            'multipliedValues' => $multipliedValues,
+            'poweredValues' => $poweredValues,
+            'summedValues' => $summedValues,
+            'multipliedByHalf' => $multipliedByHalf,
+            'crossValues' => $crossValues,
+            'multipliedCrossByHalf' => $multipliedCrossByHalf,
+            'qiValues' => $qiValues,
+            'ranking' => $ranking,
         ];
 
         return view('staff.kelolaperhitungan', $data);
