@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\KelolaUser;
 use App\Http\Controllers\Admin\KelolaTes;
 use App\Http\Controllers\Admin\KelolaLokerController;
 use App\Http\Controllers\Admin\KelolaKriteriaController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pelamar\LaporanHasilController;
 use App\Http\Controllers\Pelamar\PelamarController;
@@ -54,6 +55,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
         // laporan hasil
         Route::get('/laporanhasil', [LaporanHasilController::class, 'index'])->name('.laporan.hasil');
+        Route::put('/bataltes/{id}', [LaporanHasilController::class, 'batal_tes'])->name('.batal.tes');
     });
 
 
@@ -85,6 +87,11 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::post('/kelolakriteria/tambah-kriteria', [KelolaKriteriaController::class, 'tambah'])->name('.kelolakriteria.tambah');
         Route::delete('/kelolakriteria/{id}', [KelolaKriteriaController::class, 'hapus'])->name('.kelolakriteria.hapus-kriteria');
         Route::put('/kelolakriteria/{row}', [KelolaKriteriaController::class, 'edit'])->name('.kelolakriteria.edit');
+
+        // laporan
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('.laporan');
+        Route::put('/pelamar/diterima/{id}', [LaporanController::class, 'diterima'])->name('.pelamar.diterima');
+        Route::put('/pelamar/ditolak/{id}', [LaporanController::class, 'ditolak'])->name('.pelamar.ditolak');
     });
 
 
@@ -100,6 +107,7 @@ Route::middleware(['auth', 'web'])->group(function () {
         // dashboard
         Route::get('/', [PenilaianController::class, 'index'])->name('.dashboard');
         Route::get('/perhitungan', [PerhitunganController::class, 'index'])->name('.kelola.perhitungan');
+        Route::get('/perhitungan/hitungnilai', [PerhitunganController::class, 'simpanNilai'])->name('.hitung.perhitungan');
 
         // Penilaian
         Route::post('/staff/kelolapenilaian', [PenilaianController::class, 'tambah'])->name('.kelolapenilaian.tambah');

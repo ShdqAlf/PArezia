@@ -49,6 +49,8 @@ class TesController extends Controller
             $pelamar->file_upload = $filename;
             $pelamar->tes_id = $tes;
             $pelamar->lowongan_id = $lowongan->id;
+            $pelamar->status_tes = null;
+            $pelamar->isBatal = false;
             $pelamar->save();
             alert()->success('Tes Berhasil Diupload');
             return redirect()->route('pelamar.dashboard');
