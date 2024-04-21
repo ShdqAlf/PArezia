@@ -43,4 +43,8 @@ class PelamarModel extends Model
     {
         return $this->hasOne(PenilaianModel::class, 'pelamar_id');
     }
+    public function nilaiakhir(): HasOne
+    {
+        return $this->hasOne(NIlaiAkhirModel::class, 'pelamar_id');
+    }
 }

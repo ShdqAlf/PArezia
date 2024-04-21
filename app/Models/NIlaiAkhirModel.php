@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NormalisasiModel extends Model
+class NIlaiAkhirModel extends Model
 {
     use HasFactory;
-
-    protected $table = "normalisasi";
+    protected $table = "nilaiakhir";
     protected $fillable = [
-        'hasil_normalisasi',
-        'penilaian_id',
+        'nilaiqi',
+        'rangking',
+        'pelamar_id',
     ];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    public function penilaian()
+    public function pelamar()
     {
-        return $this->belongsTo(PenilaianModel::class);
+        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
     }
 }
