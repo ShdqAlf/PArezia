@@ -92,6 +92,7 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('/laporan', [LaporanController::class, 'index'])->name('.laporan');
         Route::put('/pelamar/diterima/{id}', [LaporanController::class, 'diterima'])->name('.pelamar.diterima');
         Route::put('/pelamar/ditolak/{id}', [LaporanController::class, 'ditolak'])->name('.pelamar.ditolak');
+        Route::get('/pdf', [LaporanController::class, 'pdf'])->name('.pdf');
     });
 
 

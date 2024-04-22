@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
+use Elibyy\TCPDF\Facades\TCPDF;
+
 use App\Http\Controllers\Controller;
 use App\Models\NIlaiAkhirModel;
 use App\Models\PelamarModel;
@@ -28,6 +31,7 @@ class LaporanController extends Controller
         alert()->success('Pelamar berhasil diterima');
         return redirect()->back();
     }
+
     public function ditolak($id)
     {
         $pelamar = PelamarModel::findOrFail($id);
@@ -41,5 +45,30 @@ class LaporanController extends Controller
             alert()->success('Pelamar berhasil ditolak');
             return redirect()->back();
         }
+    }
+
+    public function pdf()
+    {
+        $pelamar = PelamarModel::whereNotNull(['lowongan_id', 'tes_id'])->get();
+        $laporan = PelamarModel::whereNotNull(['status_tes'])->get();
+        $data = [
+            'pelamar' => $pelamar,
+            'laporan' => $laporan
+        ];
+
+        $filename = 'laporan.pdf';
+        $html = view('admin.pdf_laporan', $data)->render();
+
+        $pdf = new TCPDF;
+        $pdf::SetTitle('Hello World');
+        $pdf::AddPage();
+        $pdf::writeHTML($html, true, false, true, false, '');
+
+        // Specify the correct output destination and options
+        $pdf::Output(public_path($filename), 'F');
+
+        return response()->download(public_path($filename));
+
+        // return view('admin.pdf_laporan', $data);
     }
 }

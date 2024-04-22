@@ -63,16 +63,34 @@ class PerhitunganController extends Controller
             $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
         }
         arsort($qiValues);
+
         $ranking = [];
+        // Inisialisasi peringkat
         $rank = 1;
-        $prevQi = null;
+        // Array untuk menyimpan nilai QI sebelumnya untuk setiap lowongan_id
+        $prevQiValues = [];
         foreach ($qiValues as $pelamarId => $qi) {
-            if ($prevQi !== null && $qi !== $prevQi) {
+            // Dapatkan lowongan_id dari pelamar
+            $lowonganId = PelamarModel::find($pelamarId)->lowongan_id;
+
+            // Jika belum ada nilai QI sebelumnya untuk lowongan_id ini, inisialisasi dengan nilai QI saat ini
+            if (!isset($prevQiValues[$lowonganId])) {
+                $prevQiValues[$lowonganId] = $qi;
+            }
+
+            // Periksa apakah QI saat ini sama dengan QI sebelumnya untuk lowongan_id ini
+            if ($qi !== $prevQiValues[$lowonganId]) {
+                // Jika tidak, tingkatkan peringkat
                 $rank++;
             }
+
+            // Simpan peringkat untuk pelamar ini
             $ranking[$pelamarId] = $rank;
-            $prevQi = $qi;
+
+            // Simpan nilai QI saat ini sebagai nilai QI sebelumnya untuk lowongan_id ini
+            $prevQiValues[$lowonganId] = $qi;
         }
+
         $data = [
             'kriteria' => $kriteria,
             'penilaian' => $penilaian,
@@ -143,16 +161,34 @@ class PerhitunganController extends Controller
             $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
         }
         arsort($qiValues);
+
         $ranking = [];
+        // Inisialisasi peringkat
         $rank = 1;
-        $prevQi = null;
+        // Array untuk menyimpan nilai QI sebelumnya untuk setiap lowongan_id
+        $prevQiValues = [];
         foreach ($qiValues as $pelamarId => $qi) {
-            if ($prevQi !== null && $qi !== $prevQi) {
+            // Dapatkan lowongan_id dari pelamar
+            $lowonganId = PelamarModel::find($pelamarId)->lowongan_id;
+
+            // Jika belum ada nilai QI sebelumnya untuk lowongan_id ini, inisialisasi dengan nilai QI saat ini
+            if (!isset($prevQiValues[$lowonganId])) {
+                $prevQiValues[$lowonganId] = $qi;
+            }
+
+            // Periksa apakah QI saat ini sama dengan QI sebelumnya untuk lowongan_id ini
+            if ($qi !== $prevQiValues[$lowonganId]) {
+                // Jika tidak, tingkatkan peringkat
                 $rank++;
             }
+
+            // Simpan peringkat untuk pelamar ini
             $ranking[$pelamarId] = $rank;
-            $prevQi = $qi;
+
+            // Simpan nilai QI saat ini sebagai nilai QI sebelumnya untuk lowongan_id ini
+            $prevQiValues[$lowonganId] = $qi;
         }
+
         foreach ($pelamar as $pelamarItem) {
             $qiValue = $qiValues[$pelamarItem->id];
             $rankingValue = $ranking[$pelamarItem->id];
