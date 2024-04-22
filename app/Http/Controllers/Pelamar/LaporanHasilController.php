@@ -13,8 +13,15 @@ class LaporanHasilController extends Controller
     public function index()
     {
         $auth = auth()->user();
+<<<<<<< HEAD
+        $pelamar = PelamarModel::where('user_id', $auth->id)->first();
+        $hasil = TesModel::where('pelamar_id', $pelamar->id)->get();
+        $data = [
+            'hasil' => $hasil,
+=======
         $pelamar = PelamarModel::where('user_id', $auth->id)->where('isBatal', false)->first();
         $data = [
+>>>>>>> f970d50d90a2e56bc7951e6ab7dc1d38743e4f2e
             'pelamar' => $pelamar,
         ];
         return view("pelamar.laporanhasil", $data);
