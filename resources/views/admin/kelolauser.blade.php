@@ -74,7 +74,7 @@
                             </div>
                         </div><!-- End Basic Modal-->
                         <div class="table-responsive">
-                            <table id="kelolauser" class="display" style="width:100%">
+                            <table id="kelolauser" class="table table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KriteriaModel;
 use App\Models\PenilaianModel;
 use App\Models\PelamarModel;
-use App\Models\NilaiAkhirModel; // Tambahkan model NilaiAkhirModel
+use App\Models\NilaiAkhirModel;
 
 class PerhitunganController extends Controller
 {
@@ -109,6 +109,9 @@ class PerhitunganController extends Controller
 
         return view('staff.kelolaperhitungan', $data);
     }
+
+
+
     public function simpanNilai()
     {
         $kriteria = KriteriaModel::all();

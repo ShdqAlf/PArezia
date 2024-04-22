@@ -39,13 +39,8 @@
                                                 <label for="exampleFormControlTextarea1" class="form-label">Tambahkan
                                                     File</label>
                                                 <div class="form-file">
-                                                    <input type="file" class="form-file-input" id="customFile"
+                                                    <input type="file" class="form-control" id="customFile"
                                                         name="file">
-                                                    <label class="form-file-label" for="customFile">
-                                                        <span class="form-file-text">Pilih file...</span>
-                                                        <span class="form-file-button btn-primary "><i
-                                                                data-feather="upload"></i></span>
-                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
@@ -69,7 +64,7 @@
                             </div>
                         </div><!-- End Basic Modal-->
                         <div class="table-responsive">
-                            <table id="kelolates" class="display" style="width:100%">
+                            <table id="kelolates" class="table table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>

@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         ]);
         PelamarModel::create([
             'nama'=>'Pelamar 1',
-            'user_id'=> 3,
+            'user_id'=> 4,
         ]);
         User::create([
             'email'=>'pelamar1@gmail.com',
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
         ]);
         PelamarModel::create([
             'nama'=>'Pelamar 1',
-            'user_id'=> 4,
+            'user_id'=> 5,
         ]);
     }
 }
