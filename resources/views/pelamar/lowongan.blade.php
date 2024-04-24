@@ -61,29 +61,50 @@
                             <div class="text-end">
                                 @if ($testExists)
                                     @if ($pelamar)
-                                        @if ($pelamarv->tes_id != null)
-                                            @if ($pelamarv->file_upload != null)
-                                                <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                        @if ($pelamarv->status_tes == 'Diterima')
+                                            <a href="{{ route('pelamar.syarat', $item->id) }}"
+                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                        @else
+                                            @if ($pelamarv->tes_id != null)
+                                                @if ($pelamarv->file_upload != null)
+                                                    <a class="info-a-tes text-white">Tes Sudah Selesai</a>
+                                                    @if ($pelamarv->status_tes == null)
+                                                        <td>
+                                                            <a class="btn btn-danger" data-bs-toggle="modal"
+                                                                data-bs-target="#batalModal">Batal Tes
+                                                                ?</a>
+                                                        </td>
+                                                    @endif
+                                                @else
+                                                    <a href="#" onclick="existsTes()" class="info-a text-white">Ikuti
+                                                        Tes
+                                                        Kemampuan</a>
+                                                @endif
+                                            @elseif($pelamarv->syarat_id != null)
+                                                <a href="{{ route('pelamar.test.kemampuan', $item->syarat()->id) }}"
+                                                    class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                            @else
+                                                <a href="{{ route('pelamar.syarat', $item->id) }}"
+                                                    class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                            @endif
+                                        @endif
+                                    @else
+                                        @if ($pelamarv->status_tes == 'Diterima')
+                                            <a href="{{ route('pelamar.syarat', $item->id) }}"
+                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
+                                        @else
+                                            @if ($pelamarv->lowongan_id == null)
+                                                <a href="{{ route('pelamar.syarat', $item->id) }}"
+                                                    class="info-a text-white">Ikuti Tes Kemampuan</a>
                                             @else
                                                 <a href="#" onclick="existsTes()" class="info-a text-white">Ikuti Tes
                                                     Kemampuan</a>
                                             @endif
-                                        @else
-                                            <a href="{{ route('pelamar.test.kemampuan', $item->id) }}"
-                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
-                                        @endif
-                                    @else
-                                        @if ($pelamarv->lowongan_id == null)
-                                            <a href="{{ route('pelamar.test.kemampuan', $item->id) }}"
-                                                class="info-a text-white">Ikuti Tes Kemampuan</a>
-                                        @else
-                                            <a href="#" onclick="existsTes()" class="info-a text-white">Ikuti Tes
-                                                Kemampuan</a>
                                         @endif
                                     @endif
                                 @else
-                                <a href="#" onclick="showSweetAlert()" class="info-a text-white">Ikuti Tes
-                                    Kemampuan</a>
+                                    <a href="#" onclick="showSweetAlert()" class="info-a text-white">Ikuti Tes
+                                        Kemampuan</a>
                                 @endif
 
                             </div>
@@ -94,6 +115,26 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="batalModal" tabindex="-1" aria-labelledby="batalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="batalModalLabel">Pembatalan Tes</h5>
+                </div>
+                <form action="{{ route('pelamar.batal.tes', $pelamarv->id) }}" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="modal-body">
+                        <p>Apakah kamu yakin ingin membatalkan tes kemampuan ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Yakin</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

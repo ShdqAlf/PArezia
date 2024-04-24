@@ -49,6 +49,10 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::middleware(['verified', 'role:Pelamar'])->prefix('/pelamar')->name('pelamar')->group(function () {
         // lowongan - tes
         Route::get('/', [PelamarController::class, 'index'])->name('.dashboard');
+        Route::get('/syarat/{id}', [PelamarController::class, 'syarat'])->name('.syarat');
+        Route::get('/profil', [PelamarController::class, 'profil'])->name('.profil');
+        Route::put('/profil-edit', [PelamarController::class, 'edit_profil'])->name('.edit.profil');
+        Route::post('/syarat-upload', [PelamarController::class, 'upload_syarat'])->name('.syarat.upload');
         Route::get('/teskemampuan/{id}', [TesController::class, 'index'])->name('.test.kemampuan');
         Route::get('/teskemampuan/download/{file}', [TesController::class, 'download_file'])->name('.download.file');
         Route::post('/teskemampuan/upload/{id}', [TesController::class, 'uploadFile'])->name('.upload.file');

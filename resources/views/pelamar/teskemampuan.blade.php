@@ -31,13 +31,19 @@
                     @endif
                     <p>{{ $tes->keterangan }}</p>
                     <div class="text-right">
-                        <a href="{{ route('pelamar.download.file', $tes->file_download) }}" class="btn btn-primary">Unduh
-                            File</a>
+                       @if ($tes->file_download != null)
+                       <a href="{{ route('pelamar.download.file', $tes->file_download) }}"
+                        class="text-primary">{{ $tes->file_download }}</a>
+                        @else
+                        <a href="{{ $tes->url }}" target="_blank"
+                         class="text-primary">{{ $tes->url }}</a>
+                       @endif
                     </div>
                     <form action="{{ route('pelamar.upload.file', $tes->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tes_id" value="{{ $tes->id }}">
+                        <input type="hidden" name="syarat_id" value="{{ $syarat->id }}">
                         <div class="mt-4">
                             <div class="mb-3">
                                 <label for="file_upload" class="form-label">Upload File</label>

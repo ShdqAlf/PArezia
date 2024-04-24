@@ -15,8 +15,8 @@ class TesModel extends Model
     protected $fillable = [
         'keterangan',
         'file_download',
-        'pelamar_id',
-        'lowongan_id'
+        'lowongan_id',
+        'syarat_id'
     ];
 
     protected $casts = [
@@ -24,6 +24,10 @@ class TesModel extends Model
         'updated_at' => 'datetime',
     ];
 
+    public function syarat(): BelongsTo
+    {
+        return $this->belongsTo(Syarat::class, 'syarat_id');
+    }
     public function lowongan(): BelongsTo
     {
         return $this->belongsTo(LokerModel::class, 'lowongan_id');

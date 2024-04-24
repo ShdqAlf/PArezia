@@ -34,4 +34,8 @@ class LokerModel extends Model
     {
         return $this->hasOne(PelamarModel::class);
     }
+    public function syarat(): HasOne
+    {
+        return $this->hasOne(Syarat::class, 'lowongan_id');
+    }
 }

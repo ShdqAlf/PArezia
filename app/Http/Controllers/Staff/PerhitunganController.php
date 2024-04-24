@@ -5,17 +5,21 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KriteriaModel;
+use App\Models\LokerModel;
 use App\Models\PenilaianModel;
 use App\Models\PelamarModel;
 use App\Models\NilaiAkhirModel;
 
 class PerhitunganController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $kriteria = KriteriaModel::all();
-        $penilaian = PenilaianModel::all();
-        $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->get();
+        $pilih_lowongan = $request->input('filter');
+        $penilaian = PenilaianModel::whereHas('pelamar', function ($query) {
+            $query->whereNotNull('lowongan_id');
+        })->get();
+
         $max = [];
         $min = [];
         foreach ($kriteria as $kriteriaItem) {
@@ -59,35 +63,29 @@ class PerhitunganController extends Controller
             $multipliedCrossByHalf[$pelamarId] = $crossValue * 0.5;
         }
         $qiValues = [];
-        foreach ($pelamar as $pelamarItem) {
-            $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
+        if ($pilih_lowongan) {
+            $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->where('lowongan_id', $pilih_lowongan)->get();
+            foreach ($pelamar as $pelamarItem) {
+                $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
+            }
+        } else {
+            $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->get();;
         }
+        $pelamarfilter = LokerModel::all();;
         arsort($qiValues);
 
         $ranking = [];
-        // Inisialisasi peringkat
         $rank = 1;
-        // Array untuk menyimpan nilai QI sebelumnya untuk setiap lowongan_id
         $prevQiValues = [];
         foreach ($qiValues as $pelamarId => $qi) {
-            // Dapatkan lowongan_id dari pelamar
             $lowonganId = PelamarModel::find($pelamarId)->lowongan_id;
-
-            // Jika belum ada nilai QI sebelumnya untuk lowongan_id ini, inisialisasi dengan nilai QI saat ini
             if (!isset($prevQiValues[$lowonganId])) {
                 $prevQiValues[$lowonganId] = $qi;
             }
-
-            // Periksa apakah QI saat ini sama dengan QI sebelumnya untuk lowongan_id ini
             if ($qi !== $prevQiValues[$lowonganId]) {
-                // Jika tidak, tingkatkan peringkat
                 $rank++;
             }
-
-            // Simpan peringkat untuk pelamar ini
             $ranking[$pelamarId] = $rank;
-
-            // Simpan nilai QI saat ini sebagai nilai QI sebelumnya untuk lowongan_id ini
             $prevQiValues[$lowonganId] = $qi;
         }
 
@@ -95,6 +93,8 @@ class PerhitunganController extends Controller
             'kriteria' => $kriteria,
             'penilaian' => $penilaian,
             'pelamar' => $pelamar,
+            'pilih_lowongan' => $pilih_lowongan,
+            'pelamarfilter' => $pelamarfilter,
             'max' => $max,
             'min' => $min,
             'multipliedValues' => $multipliedValues,

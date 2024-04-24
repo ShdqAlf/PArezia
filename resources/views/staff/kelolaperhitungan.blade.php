@@ -129,11 +129,40 @@
                                 <h3 class="text-white">Perhitungan</h3>
                             </div>
                             <div class="col text-right">
-                                <a href="{{ route('staff.hitung.perhitungan') }}" class="btn btn-primary">Simpan Nilai Akhir</a>
+                                @if ($pilih_lowongan)
+                                    <a href="{{ route('staff.hitung.perhitungan') }}" class="btn btn-primary">Simpan Nilai
+                                        Akhir</a>
+                                @else
+                                    null
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="mt-4">
+                            <form action="{{ route('staff.kelola.perhitungan') }}" method="GET">
+                                <div class="mb-3">
+                                    <label for="filter" class="form-label">Filter Lowongan</label>
+                                    <div class="input-group">
+                                        <select name="filter" id="filter" onchange="this.form.submit()"
+                                            class="form-select">
+                                            @if ($pelamarfilter !== null && !$pelamarfilter->isEmpty())
+                                                @foreach ($pelamarfilter as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        @if ($pilih_lowongan == $item->judul) selected @endif>
+                                                        {{ $item->judul }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="" disabled selected>Lowongan belum ada</option>
+                                            @endif
+                                        </select>
+                                        <button class="btn btn-primary" type="submit">
+                                            <i data-feather="search" width="20"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <table id="perhitungan" class="table table-responsive table-bordered" style="width:100%">
                             <thead>
                                 <tr class="bg-secondary text-white">
@@ -143,15 +172,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($penilaian->unique('pelamar_id') as $item)
-                                    <tr>
-                                        <td>{{ $item->pelamar->nama }}</td>
-                                        <td>{{ $qiValues[$item->pelamar_id] }}</td>
-                                        <td>{{ $ranking[$item->pelamar_id] }}</td>
-                                    </tr>
-                                @endforeach
+                                @if ($pilih_lowongan)
+                                    @foreach ($pelamar as $item)
+                                        <tr>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $qiValues[$item->id] }}</td>
+                                            <td>{{ $ranking[$item->id] }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    null
+                                @endif
                             </tbody>
-
                         </table>
                     </div>
                 </div>

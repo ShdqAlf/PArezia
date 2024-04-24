@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pelamar;
 use App\Http\Controllers\Controller;
 use App\Models\LokerModel;
 use App\Models\PelamarModel;
+use App\Models\Syarat;
 use App\Models\TesModel;
 use Illuminate\Http\Request;
 
@@ -14,11 +15,12 @@ class TesController extends Controller
     {
         $user_id = auth()->user();
         $pelamar = PelamarModel::where('user_id', $user_id->id)->first();
-        $lowongan = LokerModel::find($id);
-        $tes = TesModel::where('lowongan_id', $lowongan->id)->first();
+        $syarat = Syarat::find($id);
+        $tes = TesModel::where('lowongan_id', $syarat->lowongan->id)->first();
         $data = [
             'tes' => $tes,
             'pelamar' => $pelamar,
+            'syarat' => $syarat,
         ];
         return view('pelamar.teskemampuan', $data);
     }
@@ -34,6 +36,7 @@ class TesController extends Controller
         $Idpelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $pelamar = PelamarModel::find($Idpelamar->id);
         $lowongan = LokerModel::find($id);
+        $lowongan = LokerModel::find($id);
         $request->validate([
             'file_upload' => 'required|mimes:pdf,word,zip,rar|max:5080',
         ], [
@@ -42,12 +45,14 @@ class TesController extends Controller
             'file_upload.max' => 'Ukuran File Maksimal 5MB.',
         ]);
         $tes = $request->input('tes_id');
+        $syarat = $request->input('syarat_id');
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $filename = $file->getClientOriginalName();
             $file->storeAs('file_upload/', $filename, 'public');
             $pelamar->file_upload = $filename;
             $pelamar->tes_id = $tes;
+            $pelamar->syarat_id = $syarat;
             $pelamar->lowongan_id = $lowongan->id;
             $pelamar->status_tes = null;
             $pelamar->isBatal = false;

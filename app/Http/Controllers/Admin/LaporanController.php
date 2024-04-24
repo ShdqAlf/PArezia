@@ -6,19 +6,29 @@ use PDF;
 use Elibyy\TCPDF\Facades\TCPDF;
 
 use App\Http\Controllers\Controller;
+use App\Models\LokerModel;
 use App\Models\NIlaiAkhirModel;
 use App\Models\PelamarModel;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pelamar = PelamarModel::whereNotNull(['lowongan_id', 'tes_id'])->get();
-        $laporan = PelamarModel::whereNotNull(['status_tes'])->get();
+        $pilih_lowongan = $request->input('filter');
+        if ($pilih_lowongan) {
+            $pelamar = PelamarModel::whereNotNull(['lowongan_id', 'tes_id'])->where('lowongan_id', $pilih_lowongan)->get();
+            $laporan = PelamarModel::whereNotNull(['status_tes'])->where('lowongan_id', $pilih_lowongan)->get();
+        } else {
+            $pelamar = PelamarModel::whereNotNull(['lowongan_id', 'tes_id'])->get();
+            $laporan = PelamarModel::whereNotNull(['status_tes'])->get();
+        }
+        $filterlow = LokerModel::all();
         $data = [
             'pelamar' => $pelamar,
-            'laporan' => $laporan
+            'filterlow' => $filterlow,
+            'laporan' => $laporan,
+            'pilih_lowongan' => $pilih_lowongan,
         ];
         return view("admin.laporan", $data);
     }

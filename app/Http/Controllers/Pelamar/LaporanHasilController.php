@@ -13,10 +13,9 @@ class LaporanHasilController extends Controller
     public function index()
     {
         $auth = auth()->user();
-        $pelamar = PelamarModel::where('user_id', $auth->id)->first();
-        $hasil = TesModel::where('pelamar_id', $pelamar->id)->get();
+        $pelamarId = PelamarModel::where('user_id', $auth->id)->first();
+        $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->where('lowongan_id', $pelamarId->lowongan_id)->where('status_tes', 'Diterima')->get();
         $data = [
-            'hasil' => $hasil,
             'pelamar' => $pelamar,
         ];
         return view("pelamar.laporanhasil", $data);
@@ -27,6 +26,7 @@ class LaporanHasilController extends Controller
         $pelamar = PelamarModel::find($id);
         $pelamar->lowongan_id = null;
         $pelamar->tes_id = null;
+        $pelamar->syarat_id = null;
         $pelamar->isBatal = true;
         $pelamar->file_upload = null;
         if ($pelamar->save()) {

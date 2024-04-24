@@ -1,18 +1,3 @@
-{{-- Mun rek misah ken menu sesuai role pake if --}}
-
-{{--
-    Contoh na :
-    If (Auth::user()->role == 'Admin'){
-        <li class="sidebar-item active ">
-            <a href="index.html" class='sidebar-link'>
-                <i data-feather="home" width="20"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-    }
-Jadi nu muncul ngan menu eta di role eta.
-    --}}
-
 
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
@@ -57,7 +42,7 @@ Jadi nu muncul ngan menu eta di role eta.
                 @if (Auth::user()->role == 'Admin')
                     <li class='sidebar-title'>Main Menu</li>
                     <li class="sidebar-item {{ 'admin' == request()->path() ? 'active' : '' }} ">
-                        <a href="index.html" class='sidebar-link'>
+                        <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                             <i data-feather="home" width="20"></i>
                             <span>Dashboard</span>
                         </a>

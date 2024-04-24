@@ -27,12 +27,13 @@ class KelolaTes extends Controller
         $tesKemampuan = new TesModel();
         $tesKemampuan->keterangan = $request->keterangan;
         $tesKemampuan->lowongan_id = $request->judul;
+        $tesKemampuan->url = $request->url;
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
+            $fileName = $file->getClientOriginalName();
             $file->storeAs('file_tes', $fileName, 'public');
-            $tesKemampuan->file_download = $fileName; // Sesuaikan dengan nama kolom yang benar
+            $tesKemampuan->file_download = $fileName;
         }
         $tesKemampuan->save();
         return redirect()->route('admin.kelolates.index')->with('success', 'Tes berhasil ditambahkan');
@@ -51,6 +52,7 @@ class KelolaTes extends Controller
         $tes->update([
             'keterangan' => $request->keterangan,
             'lowongan_id' => $request->judul,
+            'url' => $request->url,
         ]);
 
         if ($request->hasFile('file')) {

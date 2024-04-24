@@ -36,12 +36,25 @@
                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="keterangan"></textarea>
                                             </div>
                                             <div class="form-group mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">Tambahkan File
+                                                    atau URL</label>
+                                                <select class="form-select" id="customFileOrUrl" name="customFileOrUrl">
+                                                    <option disabled selected>Pilih...</option>
+                                                    <option value="file">File</option>
+                                                    <option value="url">URL</option>
+                                                </select>
+                                            </div>
+                                            <div id="fileInputContainer" style="display: none;" class="form-group mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Tambahkan
                                                     File</label>
                                                 <div class="form-file">
                                                     <input type="file" class="form-control" id="customFile"
                                                         name="file">
                                                 </div>
+                                            </div>
+                                            <div id="urlInputContainer" style="display: none;" class="form-group mb-3">
+                                                <label for="urlInput" class="form-label">Masukkan URL</label>
+                                                <input type="text" class="form-control" id="urlInput" name="url">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Tambahkan
@@ -59,7 +72,7 @@
                                                 data-bs-dismiss="modal">Tutup</button>
                                             <button type="submit" class="btn btn-success">Tambahkan Tes</button>
                                         </div>
-                                    </form><!-- End Horizontal Form -->
+                                    </form>
                                 </div>
                             </div>
                         </div><!-- End Basic Modal-->
@@ -70,7 +83,7 @@
                                         <th>No</th>
                                         <th>Keterangan</th>
                                         <th>File</th>
-                                        <th>Judul</th>
+                                        <th>Lowongan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -79,8 +92,14 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $tes->keterangan }}</td>
-                                            <td><a href="{{ asset($tes->file) }}" download>Unduh File</a></td>
-                                            <td></td>
+                                            <td>
+                                                @if ($tes->file_download != null)
+                                                    <a href="{{ asset($tes->file) }}" download>Unduh File</a>
+                                                @else
+                                                    <a href="{{ $tes->url }}" target="_blank">{{ $tes->url }}</a>
+                                                @endif
+                                            </td>
+                                            <td>{{ $tes->lowongan->judul }}</td>
                                             <td>
                                                 <button class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $tes->id }}">Edit</button>
@@ -118,16 +137,21 @@
                                 <input type="text" class="form-control" name="keterangan"
                                     value="{{ $tes->keterangan }}">
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Update File</label>
-                                <div class="form-file">
-                                    <input type="file" class="form-file-input" id="customFile" name="file">
-                                    <label class="form-file-label" for="customFile" value="{{ $tes->file_download }}">
-                                        <span class="form-file-text">Pilih file...</span>
-                                        <span class="form-file-button btn-primary "><i data-feather="upload"></i></span>
-                                    </label>
+                            @if ($tes->url != null)
+                                <div id="urlInputContainer" class="form-group mb-3">
+                                    <label for="urlInput" class="form-label">Masukkan URL</label>
+                                    <input type="text" class="form-control" id="urlInput" name="url"
+                                        value="{{ $tes->url }}">
                                 </div>
-                            </div>
+                            @else
+                                <div id="fileInputContainer" class="form-group mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Tambahkan
+                                        File</label>
+                                    <div class="form-file">
+                                        <input type="file" class="form-control" id="customFile" name="file">
+                                    </div>
+                                </div>
+                            @endif
                             <div class="mb-3">
                                 <label for="pendidikan" class="form-label">Judul</label>
                                 <select class="form-select" id="role" name="judul">
@@ -156,5 +180,17 @@
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
     <script>
         new DataTable('#kelolates');
+    </script>
+    <script>
+        $('#customFileOrUrl').change(function() {
+            var selectedOption = $(this).val();
+            if (selectedOption === 'file') {
+                $('#fileInputContainer').show();
+                $('#urlInputContainer').hide();
+            } else if (selectedOption === 'url') {
+                $('#urlInputContainer').show();
+                $('#fileInputContainer').hide();
+            }
+        });
     </script>
 @endsection

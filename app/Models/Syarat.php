@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Syarat extends Model
 {
@@ -30,6 +31,11 @@ class Syarat extends Model
 
     public function pelamar(): BelongsTo
     {
-        return $this->belongsTo(PelamarModel::class, 'tes_id');
+        return $this->belongsTo(PelamarModel::class, 'pelamar_id');
+    }
+
+    public function teskemampuan():HasOne
+    {
+        return $this->hasOne(TesModel::class, 'syarat_id');
     }
 }
