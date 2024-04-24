@@ -22,7 +22,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Tambah Tes</h5>
+                                        <h5 class="modal-title">Tambah Lowongan</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -34,14 +34,14 @@
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Judul</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="judul"
-                                                        placeholder="Tambahkan Judul">
+                                                        placeholder="Tambahkan Judul" required>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Posisi</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="posisi"
-                                                        placeholder="Tambahkan Posisi">
+                                                        placeholder="Tambahkan Posisi" required>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -63,7 +63,7 @@
                                                     pengalaman</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="pengalaman"
-                                                        placeholder="Minimal Pengalaman">
+                                                        placeholder="Minimal Pengalaman" required>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -71,7 +71,7 @@
                                                     Maksimal</label>
                                                 <div class="col-sm-8">
                                                     <input type="number" class="form-control" name="usia_maks"
-                                                        placeholder="Usia Maksimal">
+                                                        placeholder="Usia Maksimal" required>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -79,13 +79,13 @@
                                                     Berakhir</label>
                                                 <div class="col-sm-8">
                                                     <input type="date" class="form-control" name="tanggal_berakhir"
-                                                        placeholder="Tanggal Berakhir">
+                                                        placeholder="Tanggal Berakhir" required>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Tambahkan
                                                     Keterangan</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="keterangan"></textarea>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="keterangan" required></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
