@@ -171,7 +171,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($pilih_lowongan && count($pelamar) > 0) <!-- Periksa apakah ada lowongan dipilih dan ada pelamar -->
+                            @if ($pilih_lowongan && count($pelamar) > 0)
                             @foreach ($pelamar as $item)
                             @if ($qiValues[$item->id] !== null) <!-- Periksa apakah nilai QI tidak null -->
                             <tr>
@@ -182,9 +182,7 @@
                             @endif
                             @endforeach
                             @else
-                            <tr>
-                                <td colspan="3">Tidak ada data yang tersedia</td> <!-- Tampilkan pesan jika tidak ada lowongan yang dipilih atau tidak ada pelamar -->
-                            </tr>
+                            null
                             @endif
                         </tbody>
 
