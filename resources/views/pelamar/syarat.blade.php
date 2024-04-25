@@ -39,11 +39,36 @@
                                 <input type="file" name="cv" id="cv" class="form-control">
                             </div>
                         </div>
+                        <div class="mt-4">
+                            <div class="mb-3">
+                                <label for="pendidikan_terakhir" class="form-label">Riwayat Pendidikan</label>
+                                <select name="pendidikan_terakhir" id="pendidikan_terakhir" class="form-select">
+                                    <option value="SMA/SMK">SMA/SMK</option>
+                                    <option value="D3">D3</option>
+                                    <option value="D4">D4</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S3">S3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="mb-3">
+                                <label for="pengalaman_terakhir" class="form-label">Riwayat Pengalaman</label>
+                                <select name="pengalaman_terakhir" id="pengalaman_terakhir" class="form-select">
+                                    <option value="<= 1 Tahun"><= 1 Tahun</option>
+                                    <option value="1 Tahun >= 2 Tahun">1 Tahun >= 2 Tahun</option>
+                                    <option value="1 Tahun >= 5 Tahun">1 Tahun >= 5 Tahun</option>
+                                    <option value="1 Tahun >= 10 Tahun">1 Tahun >= 10 Tahun</option>
+                                </select>
+                            </div>
+                        </div>
                         <h5 class="fw-bold">Dokumen Tambahan</h5>
                         <p>
-                            <ul>
-                                <li>Surat Lamaran</li>
-                            </ul>
+                        <ul>
+                            <li>Surat Ijazah</li>
+                            <li>Surat Lamaran</li>
+                        </ul>
                         </p>
                         <div class="mt-4">
                             <div class="mb-3">

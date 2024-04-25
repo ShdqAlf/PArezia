@@ -55,7 +55,7 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::post('/syarat-upload', [PelamarController::class, 'upload_syarat'])->name('.syarat.upload');
         Route::get('/teskemampuan/{id}', [TesController::class, 'index'])->name('.test.kemampuan');
         Route::get('/teskemampuan/download/{file}', [TesController::class, 'download_file'])->name('.download.file');
-        Route::post('/teskemampuan/upload/{id}', [TesController::class, 'uploadFile'])->name('.upload.file');
+        Route::post('/teskemampuan/upload', [TesController::class, 'uploadFile'])->name('.upload.file');
 
         // laporan hasil
         Route::get('/laporanhasil', [LaporanHasilController::class, 'index'])->name('.laporan.hasil');

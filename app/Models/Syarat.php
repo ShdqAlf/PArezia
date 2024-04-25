@@ -15,6 +15,8 @@ class Syarat extends Model
     protected $fillable = [
         'cv',
         'dokumen_lainnya',
+        'pendidikan_terakhir',
+        'pengalaman_terakhir',
         'pelamar_id',
         'lowongan_id'
     ];

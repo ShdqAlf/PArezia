@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('cv');
             $table->string('dokumen_lainnya');
+            $table->string('pengalaman_terakhir');
+            $table->string('pendidikan_terakhir');
             $table->unsignedBigInteger('lowongan_id');
             $table->foreign('lowongan_id')->references('id')->on('lowongan')->onDelete('cascade');
             $table->timestamps();

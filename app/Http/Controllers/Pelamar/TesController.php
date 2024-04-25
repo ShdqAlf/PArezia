@@ -30,13 +30,11 @@ class TesController extends Controller
         return response()->download(public_path('file_tes/' . $file));
     }
 
-    public function uploadFile(Request $request, $id)
+    public function uploadFile(Request $request)
     {
         $user_id = auth()->user();
         $Idpelamar = PelamarModel::where('user_id', $user_id->id)->first();
         $pelamar = PelamarModel::find($Idpelamar->id);
-        $lowongan = LokerModel::find($id);
-        $lowongan = LokerModel::find($id);
         $request->validate([
             'file_upload' => 'required|mimes:pdf,word,zip,rar|max:5080',
         ], [
@@ -46,6 +44,7 @@ class TesController extends Controller
         ]);
         $tes = $request->input('tes_id');
         $syarat = $request->input('syarat_id');
+        $lowongan = Syarat::find($syarat);
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $filename = $file->getClientOriginalName();
@@ -53,7 +52,7 @@ class TesController extends Controller
             $pelamar->file_upload = $filename;
             $pelamar->tes_id = $tes;
             $pelamar->syarat_id = $syarat;
-            $pelamar->lowongan_id = $lowongan->id;
+            $pelamar->lowongan_id = $lowongan->lowongan_id;
             $pelamar->status_tes = null;
             $pelamar->isBatal = false;
             $pelamar->save();

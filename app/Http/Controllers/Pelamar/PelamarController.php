@@ -121,6 +121,8 @@ class PelamarController extends Controller
             $dokumen_lainnya->storeAs('syarat/dokumen_tambahan/', $filenamedokumen, 'public');
             $data = new Syarat([
                 'lowongan_id' => $lowongan_id,
+                'pengalaman_terakhir' => $request->input('pengalaman_terakhir'),
+                'pendidikan_terakhir' => $request->input('pendidikan_terakhir'),
                 'cv' => $filenamecv,
                 'dokumen_lainnya' => $filenamedokumen,
             ]);

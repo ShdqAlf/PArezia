@@ -61,7 +61,7 @@
                             <div class="text-end">
                                 @if ($testExists)
                                     @if ($pelamar)
-                                        @if ($pelamarv->status_tes == 'Diterima')
+                                        @if ($pelamarv->status_tes == 'Diterima' || $pelamarv->status_tes != null)
                                             <a href="{{ route('pelamar.syarat', $item->id) }}"
                                                 class="info-a text-white">Ikuti Tes Kemampuan</a>
                                         @else
@@ -89,7 +89,7 @@
                                             @endif
                                         @endif
                                     @else
-                                        @if ($pelamarv->status_tes == 'Diterima')
+                                        @if ($pelamarv->status_tes == 'Diterima' || $pelamarv->status_tes != null)
                                             <a href="{{ route('pelamar.syarat', $item->id) }}"
                                                 class="info-a text-white">Ikuti Tes Kemampuan</a>
                                         @else
