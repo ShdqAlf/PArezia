@@ -131,8 +131,8 @@
                 @method('put')
                 <input type="hidden" name="pelamar_id" value="{{ $item->id }}">
                 <div class="modal-body">
-                    @foreach ($penilaian as $row)
-                    <input type="hidden" name="penilaian_id" value="{{ $row->id }}">
+                    @foreach ($penilaian->where('pelamar_id', $item->id) as $row)
+                    <input type="hidden" name="penilaian_id[]" value="{{ $row->id }}">
                     <div class="mb-3">
                         <label for="" class="form-label">Nilai {{ $row->kriteria->kode_bobot }}</label>
                         <input type="text" class="form-control" id="email" name="nilai_{{ $row->kriteria->id }}" placeholder="Masukkan Nilai {{ $row->kriteria->kode_bobot }}" value="{{ $row->nilai }}">
@@ -148,6 +148,7 @@
     </div>
 </div>
 @endforeach
+
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

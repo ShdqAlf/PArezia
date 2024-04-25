@@ -66,7 +66,18 @@ class PerhitunganController extends Controller
         if ($pilih_lowongan) {
             $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->where('lowongan_id', $pilih_lowongan)->get();
             foreach ($pelamar as $pelamarItem) {
-                $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
+                // Periksa apakah kunci ada dalam array $multipliedByHalf dan $multipliedCrossByHalf sebelum mengaksesnya
+                if (isset($multipliedByHalf[$pelamarItem->id]) && isset($multipliedCrossByHalf[$pelamarItem->id])) {
+                    // Jika kunci ada, akses nilainya dan hitung $qiValues
+                    $qiValues[$pelamarItem->id] = $multipliedByHalf[$pelamarItem->id] + $multipliedCrossByHalf[$pelamarItem->id];
+                } else {
+                    // Jika kunci tidak ada, mungkin ada kesalahan dalam pengambilan data atau perhitungan sebelumnya
+                    // Anda bisa menangani kasus ini sesuai dengan kebutuhan aplikasi Anda, seperti memberikan nilai default atau menampilkan pesan kesalahan
+                    // Contoh:
+                    $qiValues[$pelamarItem->id] = null;
+                    // atau
+                    // throw new \Exception('Data tidak lengkap untuk menghitung nilai QI');
+                }
             }
         } else {
             $pelamar = PelamarModel::whereNotNull('lowongan_id')->whereNotNull('tes_id')->get();;

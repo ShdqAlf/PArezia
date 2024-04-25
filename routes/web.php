@@ -71,7 +71,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         // kelola user
         Route::get('/kelolauser', [KelolaUser::class, 'index'])->name('.kelolauser.index');
         Route::post('/kelolauser/tambah-pengguna', [KelolaUser::class, 'tambahPengguna'])->name('.kelolauser.tambah-pengguna');
-        Route::delete('/kelolauser/{user}', [KelolaUser::class, 'hapusPengguna'])->name('.kelolauser.hapus-pengguna');
+        // Route::delete('/kelolauser/{user}', [KelolaUser::class, 'hapusPengguna'])->name('.kelolauser.hapus-pengguna');
+        Route::delete('kelolauser/hapus-pengguna/{user}', [KelolaUser::class, 'hapusPengguna'])->name('.kelolauser.hapus-pengguna');
         Route::put('/kelolauser/{user}', [KelolaUser::class, 'edit'])->name('.kelolauser.edit');
 
         // kelola tes
